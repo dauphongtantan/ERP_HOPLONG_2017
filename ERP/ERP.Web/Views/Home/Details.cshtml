@@ -1,0 +1,170 @@
+﻿@model ERP.Web.Models.Database.POST
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .show {
+        display: block !important;
+    }
+
+    .notshow {
+        display: none;
+    }
+</style>
+@*<div ng-app="myApp" ng-controller="chitietbaivietCtrl">
+    <div ng-repeat="item in listchitiet">
+        <button ng-class="checkid(item.NGUOI_DANG_BAI)" type="button" class="btn col-md-1" style="float:right;margin-top: 20px" data-toggle="modal" data-target="#myEdit" ng-click="edit(item)">Sửa bài viết</button>
+        <input type="hidden" value="@Session["IS_AMIN"]" id="admin" name="admin"/>
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 20px; border: 1px solid #DCF5FC;box-shadow: 3px 3px 3px #DCF5FC; border-radius:5px">
+            <div class="col-md-12" sstyle="margin: 20px;">
+                <div class="col-md-6"><img ng-src="~/Content/Images/BaiViet/{{item.ANH_BAI_VIET}}" style="width: 100%;height: 100%;" /></div>
+                <div class="col-md-6">
+                    <h1 style="color: #097be0"><b>{{item.TIEU_DE_BAI_VIET}}</b></h1>
+                    <br />
+                    <br />
+                    <p class="col-md-6" style="color: #097be0"><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{{item.NGAY_DANG_BAI | stringToDate:"shortDate" }}</p>
+                    <p class="col-md-6" style="color: #097be0"><i class="fa fa-user" aria-hidden="true" style="margin-right: 5px;"></i>{{item.HO_VA_TEN}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="{{item.MA_BAI_VIET}}-1  col-md-8 col-md-offset-2" style="margin-top: 20px; border: 1px solid #DCF5FC;box-shadow: 3px 3px 3px #DCF5FC; border-radius:5px" ng-bind-html="item.NOI_DUNG_BAI_VIET | unsafe">
+        </div>
+    </div>
+    
+</div>*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blog Post - Start Bootstrap Template</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/blog-post.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="~/Content/self-writing/js/Controllers/LoadChiTietBaiVietCtrl.js"></script>
+</head>
+<body>
+
+    <!-- Page Content -->
+    <div class="container" ng-app="myApp" ng-controller="LoadChiTietBaiVietCtrl" style="width: 100%; padding-top: 12px;">
+        <div ng-repeat="item in listchitiet">
+            <!-- Blog Post Content Column -->
+            <div class="col-md-9" style="box-shadow: 4px 4px 12px #888888;padding: 0px 0px 0px 10px; background-color: whitesmoke;">
+                <!-- Blog Post -->
+                <!-- Title -->
+                <h1>{{item.TIEU_DE_BAI_VIET}}</h1>
+                <!-- Author -->
+                <p class="lead">
+                    by <a href="#">{{item.HO_VA_TEN}}</a>
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span>{{item.NGAY_DANG_BAI | stringToDate:"shortDate" }}</p>
+                <hr>
+
+                <!-- Preview Image -->
+                
+                <!-- Post Content -->
+                <p class="{{item.MA_BAI_VIET}}-1" ng-bind-html="item.NOI_DUNG_BAI_VIET | unsafe"></p>
+                <br />
+                <br />
+               
+            </div>
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-3">
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <img ng-src="~/Content/Images/BaiViet/{{item.ANH_BAI_VIET}}" style="width: 55%;height: 55%;" alt="">
+                </div>
+                <div>
+                    <button ng-class="checkid(item.NGUOI_DANG_BAI)" type="button" class="btn btn-primary" style=" margin-top: 20px" data-toggle="modal" data-target="#myEdit" ng-click="edit(item)">Sửa bài viết</button>
+                    <input type="hidden" value="@Session["IS_AMIN"]" id="admin" />
+                </div>
+                
+            </div>
+        </div>
+        <!-- /.row -->
+        <hr>
+        <div class="modal fade" id="myEdit" role="dialog">
+            <div class="modal-dialog modal-lg" style="width: 80%">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="myForm" novalidate>
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend>Update Inventory</legend>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label" for="name">Tiêu đề: </label>
+                                    <div class="col-md-11">
+                                        <input id="tieude" name="tieude" type="text" placeholder="Tiêu đề" class="form-control input-md" ng-model="item.TIEU_DE_BAI_VIET">
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label" for="name">Nội dung bài viết: </label>
+                                    <div class="col-md-11">
+                                        <textarea id="editnoidung" name="editnoidung" type="text" placeholder="Nội dung bài viết" class="form-control input-md" ng-model="item.NOI_DUNG_BAI_VIET"></textarea>
+                                    </div>
+                                </div>
+                                <script>
+                                CKEDITOR.replace('editnoidung', {
+                                    height: 400
+                                });
+                                </script>
+                                <!-- Button (Double) -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="anmelden"></label>
+                                    <div class="col-md-8">
+                                        <button id="addnew" name="addnew" class="btn btn-success" ng-click="save(item.MA_BAI_VIET)" data-dismiss="modal">Save</button>
+                                        <button id="exit" name="exit" class="btn btn-danger" data-dismiss="modal">Exit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

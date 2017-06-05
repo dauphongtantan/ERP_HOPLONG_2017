@@ -1,0 +1,26 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/download/pnotify.custom.min.css" rel="stylesheet" />
+<link href="~/Content/self-writing/css/Feedback.css" rel="stylesheet" />
+<script src="~/Content/self-writing/js/Controllers/RouteCtrl.js"></script>
+<script src="~/Content/Scripts/moment.min.js"></script>
+<script src="~/Content/assets/js/plugins/notifications/pnotify.min.js"></script>
+<link href="~/Content/self-writing/css/MetroUI.css" rel="stylesheet" />
+<script src="~/Content/self-writing/js/Metro UI.js"></script>
+<script src="~/Content/self-writing/js/Controllers/HeSoGiaBanCtrl.js"></script>
+<script src="~/Content/self-writing/js/Controllers/FeedBack/FeedBackCtrl.js"></script>
+<div ng-app="myApp"
+     ng-controller="HomeThongBaoSaleCtrl"
+     layout="column">
+
+    <md-tabs md-stretch-tabs
+             md-selected="selectedIndex">
+        <md-tab label="Hệ số giá bán"></md-tab>
+        <md-tab label="Bài viết"></md-tab>
+    </md-tabs>
+
+    <div id="content" ui-view flex> </div>
+
+</div>
+
+

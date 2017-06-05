@@ -1,0 +1,119 @@
+﻿@model ERP.Web.Models.Database.BH_DON_HANG_PO
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<link rel="stylesheet" type="text/css" href="/Content/font-awesome/css/font-awesome.min.css" />
+
+<div class="container" ng-app="myApp" ng-controller="nhacungcapCtrl">
+    <button id="exportButton" class="btn btn-lg btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
+
+
+
+    <table id="exportTable" class="table table-hover" cellspacing="0" >
+        <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>SDT</th>
+                <th>Fax</th>
+                <th>Loại</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr dir-paginate="item in filtered = (list_nhacungcap | filter: {TEN_NHA_CUNG_CAP:search_text}) | itemsPerPage:15 | orderBy: 'item.TEN_NHA_CUNG_CAP'" ng-click="transfer(item);get_lienhencc(item.MA_NHA_CUNG_CAP);get_taikhoanncc(item.MA_NHA_CUNG_CAP);loai_hang_cung_cap(item.MA_NHA_CUNG_CAP)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{item.MA_NHA_CUNG_CAP}}</td>
+                <td class="text-left" data-toggle="modal" data-target="#chitietkhachhang">{{item.TEN_NHA_CUNG_CAP}}</td>
+                <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{item.EMAIL}}</td>
+                <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{ item.SDT}}</td>
+                <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{item.FAX}}</td>
+                <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{item.TEN_LOAI_NCC}}</td>
+            </tr>
+            <!--Detail row-->
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9" style="border: none !important">
+                    <dir-pagination-controls max-size="12" style="float:right;"
+                                             direction-links="true"
+                                             boundary-links="true">
+                    </dir-pagination-controls>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!-- you need to include the shieldui css and js assets in order for the components to work -->
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#exportButton").click(function () {
+            // parse the HTML table element having an id=exportTable
+            var dataSource = shield.DataSource.create({
+                data: "#exportTable",
+                schema: {
+                    type: "table",
+                    fields: {
+                        Mã: { type: String },
+                        Tên: { type: String },
+                        Email: { type: String },
+                        SDT: { type: Number },
+                        Fax: { type: Number },
+                        Loại: {type: String}
+
+                    }
+                }
+            });
+
+            // when parsing is done, export the data to PDF
+            dataSource.read().then(function (data) {
+                var pdf = new shield.exp.PDFDocument({
+                    author: "PrepBootstrap",
+                    created: new Date()
+                });
+
+                pdf.addPage("a4", "portrait");
+
+                pdf.table(
+                    50,
+                    50,
+                    data,
+
+                    [
+                        { field: "Mã", title: "Mã", width: 50 },
+                        { field: "Tên", title: "Tên", width: 50 },
+                        { field: "Email", title: "Email Address", width: 50 },
+                        { field: "SDT", title: "Số điện thoại", width: 50 },
+                        { field: "Fax", title: "Fax", width: 50 },
+                        { field: "Loại", title: "Loại nhà cung cấp  ", width: 50 }
+                    ],
+                    {
+                        margins: {
+                            top: 50,
+                            left: 50
+                        }
+                    }
+                );
+
+                pdf.saveAs({
+                    fileName: "PrepBootstrapPDF"
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    #exportButton {
+        border-radius: 0;
+    }
+</style>

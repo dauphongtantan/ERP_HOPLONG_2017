@@ -1,0 +1,221 @@
+﻿
+<script src="~/Content/self-writing/js/Controllers/KhachHang/ChiTietKhachHangCtrl.js"></script>
+
+<div class="chitietkhachhang" id="chitietkhachhang" tabindex="-1" ng-app="myApp" ng-controller="ChiTietKhachHangCtrl">
+    <div style="width:100%;">
+        <div class="content" style="height: 60%;">
+
+            <div class="col-md-12">
+                <div class="col-md-4" style="margin-top:10px;">
+                    <div class="col-md-2">
+                        <img ng-src="" style="width: 100%;height: 100px;" />
+                    </div>
+                    <div class="info-block block-info clearfix col-md-10">
+                        <div><h4 style="font-weight:bold">{{ThongTinKhachHang.TEN_CONG_TY}}</h4></div>
+                        <span>Mã khách hàng: {{ThongTinKhachHang.MA_KHACH_HANG}}</span>
+                    </div>
+                </div>
+                <div class="col-md-8" style="margin-top:10px;">
+                    <div style="margin-bottom: 5%;" class="col-lg-12">
+                        <div class="info-block block-info clearfix col-md-3">
+                            <div>
+                                <img src="~/Content/Images/Avatar/{{ThongTinKhachHang.AVATAR}}" class="img-circle img-responsive" alt="" style="width: 20%;height: 50px;" />
+                            </div>
+                            <h4>Name:NV01</h4>
+                        </div>
+                        <div class="info-block block-info clearfix col-md-3">
+                            <div>
+                                <h1>4</h1>
+                            </div>
+                            <span>Liên hệ cuối</span>
+                        </div>
+                        <div class="info-block block-info clearfix col-md-3">
+                            <div>
+                                <h1>7</h1>
+                            </div>
+                            <span>Tương tác</span>
+                        </div>
+                        <div class="info-block block-info clearfix col-md-3">
+                            <div>
+                                <h1>24,404,444</h1>
+                            </div>
+                            <span>Giá trị</span>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           
+            <div>
+                <div class="col-md-3">
+                    <div class="well">
+                        <p>MỐI QUAN HỆ</p>
+                        <select style="width: 60%;">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <div class="well">
+                        <div id="myProgress">
+                            <p>ĐỘ HOÀN THIỆN HỒ SƠ</p>
+                            <div id="myBar">50%</div>
+                        </div>
+
+                    </div>
+                    <div class="well">
+                        <div class="footer">
+                            <div class="logofooter"> THÔNG TIN LIÊN HỆ</div>
+                            <p>Anh....</p>
+                            <p><i class="fa fa-map-pin"></i> #228, Tiruvannamalai, Tamilnadu, India</p>
+                            <p><i class="fa fa-phone"></i> Phone (India) : +91 9999 999 999</p>
+                            <p><i class="fa fa-envelope"></i> E-mail : info@prabuuideveloper.com</p>
+
+                        </div>
+                        <div class="footer">
+                            <h6 class="heading7">Social Media</h6>
+                            <ul class="footer-social">
+                                <li><i class="fa fa-linkedin social-icon linked-in" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-facebook social-icon facebook" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-twitter social-icon twitter" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-google-plus social-icon google" aria-hidden="true"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#traodoi">Trao đổi</a></li>
+                            <li><a data-toggle="tab" href="#khphanhoi">Khách hàng phản hồi</a></li>
+                            <li><a data-toggle="tab" href="#lichsugiaodich">Lịch sử giao dịch</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Giao dịch <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Thống kê</a></li>
+                                    <li><a href="#">Công nợ</a></li>
+                                    <li><a href="#">Đơn hàng</a></li>
+                                    <li><a href="#">Sản phẩm</a></li>
+                                </ul>
+                            </li>
+                            <li><a data-toggle="tab" href="#taikhoan">Cơ hội</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="traodoi" class="tab-pane fade in active">
+                                <div class="col-md-12" style="box-shadow: 3px 3px 3px #ddd">
+                                    <div class="ckeditor">
+                                        <textarea id="thong_tin_phan_hoi" name="thong_tin_phan_hoi" class="form-control input-md" placeholder="Nhập trả lời.........."></textarea>
+                                    </div>
+                                    <br />
+                                    <center>
+                                        <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEdit" class="btn fa fa-pencil-square-o">Gửi</button>
+                                        <button id="exit" name="exit" ng-click="showrow = false" class="btn fa fa-sign-out" data-dismiss="modal">Exit</button>
+                                    </center>
+                                </div>
+                                <script>
+                                CKEDITOR.replace('thong_tin_phan_hoi', {
+                                        height: 150
+                                    });
+                                </script>
+                            </div>
+                            <div id="khphanhoi" class="tab-pane fade in active">
+                                <div class="col-md-12" style="box-shadow: 3px 3px 3px #ddd">
+                                    <div class="ckeditor">
+                                        <textarea id="kh_phan_hoi" name="kh_phan_hoi" class="form-control input-md" placeholder="Nhập trả lời......."></textarea>
+                                    </div>
+                                    <br />
+                                    <center>
+                                        <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEdit" class="btn fa fa-pencil-square-o">Gửi</button>
+                                        <button id="exit" name="exit" ng-click="showrow = false" class="btn fa fa-sign-out" data-dismiss="modal">Exit</button>
+                                    </center>
+                                </div>
+                                <script>
+                                CKEDITOR.replace('kh_phan_hoi', {
+                                        height: 150
+                                    });
+                                </script>
+                            </div>
+                            <div id="lichsugiaodich" class="tab-pane fade in active">
+                                <div class="list-group list-group-horizontal">
+                                    <a href="#" class="list-group-item active">Tuần này</a>
+                                    <a href="#" class="list-group-item">Tuần trước</a>
+                                    <a href="#" class="list-group-item">Tháng trước</a>
+                                    <a href="#" class="list-group-item">Năm nay</a>
+                                    <a href="#" class="list-group-item">Thời gian khác</a>
+                                    <a href="#" class="list-group-item">Tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<style>
+    #myBar {
+        width: 50%;
+        height: 30px;
+        background-color: #4CAF50;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+    }
+
+
+    .list-group-horizontal .list-group-item {
+        display: inline-block;
+    }
+
+    .list-group-horizontal .list-group-item {
+        margin-bottom: 0;
+        margin-left: -4px;
+        margin-right: 0;
+    }
+
+        .list-group-horizontal .list-group-item:first-child {
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .list-group-horizontal .list-group-item:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-left-radius: 0;
+        }
+
+    .glyphicon-lg {
+        font-size: 4em;
+    }
+
+    .info-block {
+        border-right: 5px solid #E6E6E6;
+        margin-bottom: 25px;
+    }
+
+        .info-block .square-box {
+            width: 100px;
+            min-height: 110px;
+            margin-right: 22px;
+            text-align: center !important;
+            background-color: #676767;
+            padding: 20px 0;
+        }
+
+        .info-block.block-info {
+            border-color: #20819e;
+        }
+
+            .info-block.block-info .square-box {
+                background-color: #20819e;
+                color: #FFF;
+            }
+
+    .nav-tabs > li > a {
+        width: 206px;
+    }
+</style>
+

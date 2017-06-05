@@ -1,0 +1,82 @@
+﻿.dynamicTile .col-sm-2.col-xs-4{
+    padding:5px;
+}
+
+
+
+#tile1{
+    background: rgb(0,172,238);
+}
+
+#AUTONICS{
+    background-color: #EE6E01 !important;
+}
+
+#SCHNEIDER{
+    background-color: #00A650 !important;
+}
+#Omron{
+    background-color: #2A8BF6 !important;
+}
+#IDEC{
+    background-color: #AF251B !important;
+}
+#LS{
+    background-color: #023878 !important;
+}
+#MITSUBISHI{
+    background-color: #ED1B24 !important;
+}
+#PROFACE{
+    background-color: #0066B1 !important;
+}
+#TOSHIBA{
+    background-color: #FE0002 !important;
+}
+#PROFACE{
+    background-color: #0066B1 !important;
+}
+#FUJI{
+    background-color: #0065B5 !important;
+}
+#DECA{
+    background-color: #023562 !important;
+}
+#TEND{
+    background-color: #D3152F !important;
+}
+#SIEMENS{
+    background-color: #009596 !important;
+}
+#SMC{
+    background-color: #0066B1 !important;
+}
+
+#YASKAWA{
+    background-color: #0066B1 !important;
+}
+#AUTOBASE{
+    background-color: #131313 !important;
+}
+#131313
+
+
+.tilecaption{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%); 
+    margin:0!important;
+    text-align: center;
+    color:white;
+    font-family: Segoe UI;
+    font-weight: lighter;
+}
+.container {
+    width: 100%;
+}
+
+
+
+

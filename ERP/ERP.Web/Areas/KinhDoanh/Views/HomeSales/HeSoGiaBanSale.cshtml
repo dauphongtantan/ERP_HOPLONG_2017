@@ -1,0 +1,73 @@
+﻿
+@{ Layout = null;
+}
+<link href="~/Content/self-writing/css/Kinhdoanh/donhangPO.css" rel="stylesheet" />
+<style>
+    /* Let's get this party started */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: #00BFFF;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+        ::-webkit-scrollbar-thumb:window-inactive {
+            background: #00BFFF;
+        }
+</style>
+<div class="content dynamicTile" ng-app="myApp" ng-controller="HeSoGiaBanCtrl" style="width: 100%">
+
+    <h2 style="font-weight: bold; color: darkturquoise; padding-bottom: 10px;">Tuần : {{tuan}}   / {{nam}}</h2>
+
+    <div class="col-md-12" ng-repeat="item in ds_hesogiaban">
+        <ul>
+            <p style="color:orange;font-weight: bold;font-size: 16px;padding-bottom: 5px;">{{item.MA_NHOM_HANG}}</p>
+            <li style="list-style-type:none">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Dòng Seri</th>
+                            <th>Loại khách lẻ</th>
+                            <th>Loại khách mua nhiều</th>
+                            <th>Khách đại lý</th>
+                            <th>Khách không lấy VAT</th>
+                            <th>Số lượng mua trên 30</th>
+                            <th>Số lượng mua trên 100</th>
+                            <th>Số lượng mua trên 200</th>
+                            <th>Ghi chú</th>
+                            <th>Ngày điều chỉnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{item.DONG_SERI}}</td>
+                            <td>{{item.LOAI_KHACH_LE}}</td>
+                            <td>{{item.LOAI_KHACH_MUA_NHIEU}}</td>
+                            <td>{{item.KHACH_DAI_LY}}</td>
+                            <td>{{item.KHACH_KHONG_LAY_VAT}}</td>
+                            <td>{{item.SL_MUA_HON_30}}</td>
+                            <td>{{item.SL_MUA_HON_100}}</td>
+                            <td>{{item.SL_MUA_HON_200}}</td>
+                            <td>{{item.GHI_CHU}}</td>
+                            <td>{{item.NGAY_DIEU_CHINH | date: 'dd/MM/yyyy'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </div>
+
+    
+</div>

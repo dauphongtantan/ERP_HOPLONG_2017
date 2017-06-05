@@ -1,0 +1,83 @@
+﻿
+<html>
+<head>
+     <!-- Modernizr -->
+    <meta charset="utf-8" />
+    <title>Bootstrap FAQ Template | PrepBootstrap</title>
+    <link href="~/Content/download/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="~/Content/download/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/self-writing/js/Controllers/FAQ.js"></script>
+
+</head>
+<body>
+    <div class="container" ng-controller="FAQCtrl">
+        <div id="quick-access">
+            <form class="form-inline quick-search-form" role="form" action="#">
+                <div class="form-group" style="width: 100%; margin:23px 0px 0px 69px;">
+                    <input type="text" style="width: 75%; border:1px solid #ddd !important" class="form-control" placeholder="Nhập câu hỏi mà bạn muốn tìm........" ng-model="search_text" ng-change="LocFAQ(search_text)">
+                </div>
+            </form>
+        </div>
+        <div class="page-header">
+            <h1>FAQ - Câu hỏi thường gặp</h1>
+        </div>
+        <!-- Bootstrap FAQ - START -->
+        <div class="container" ng-repeat="item in lisDSPhanHoi">
+   
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#item-{{$index}}" ng-bind-html="item.THONG_TIN_PHAN_HOI | unsafe" ng-click="showdata();"></a>
+                        </h4>
+                    </div>
+                    <div id="item-{{$index}}" style="display:none;" >
+                        <div class="panel-body">
+                            <p>{{item.TRA_LOI_PHAN_HOI}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Bootstrap FAQ - END -->
+    </div>
+    <style>
+        .collapse.in {
+    display: block !important;
+}
+        .faqHeader {
+            font-size: 27px;
+            margin: 20px;
+        }
+
+        .panel-heading [data-toggle="collapse"]:after {
+            font-family: 'Glyphicons Halflings';
+            content: "\e072"; /* "play" icon */
+            float: right;
+            color: black;
+            font-size: 18px;
+            line-height: 22px;
+            /* rotate "play" icon from > (right arrow) to down arrow */
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            /*transform: rotate(-90deg);*/
+            margin-top: -22px;
+        }
+
+        .panel-heading [data-toggle="collapse"].collapsed:after {
+            /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+            color: #454444;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿@model ERP.Web.Models.Database.BH_DON_HANG_PO
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BH_DON_HANG_PO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAY_LEN_PO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAY_LEN_PO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TEN_LIEN_HE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TEN_LIEN_HE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HINH_THUC_THANH_TOAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HINH_THUC_THANH_TOAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.THUE_SUAT_GTGT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.THUE_SUAT_GTGT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIEN_THUE_GTGT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIEN_THUE_GTGT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TONG_TIEN_THANH_TOAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TONG_TIEN_THANH_TOAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SO_TIEN_VIET_BANG_CHU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SO_TIEN_VIET_BANG_CHU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KH.TEN_CONG_TY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KH.TEN_CONG_TY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCTC_NHAN_VIEN.GIOI_TINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCTC_NHAN_VIEN.GIOI_TINH)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

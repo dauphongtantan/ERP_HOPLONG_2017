@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "POChuaXuLy";
+}
+<script src="~/Content/self-writing/js/Services/POChuaXuLyService.js"></script>
+<script src="~/Content/self-writing/js/Controllers/POChuaXuLyCtrl.js"></script>
+
+<div ng-controller="POChuaXuLyCtrl" ng-app="myApp">
+    <input type="hidden" id="username" value="@Session["USERNAME"]"/>
+    <input type="hidden" id="macongty" value="@Session["MA_CONG_TY"]" />
+    <div class="content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã số PO</th>
+                    <th>Ngày lên PO</th>
+                    <th>Khách hàng</th>
+                    <th>Tên liên hệ</th>
+                    <th>Hình thức thanh toán</th>
+                    <th>Tổng tiền hàng</th>
+                    <th>Số tiền viết bằng chữ</th>
+                    <th>Ngày giao hàng</th>
+                    <th>Địa điểm giao hàng</th>
+                    <th>Nhân viên quản lý</th>
+                    <th>Đã bán hàng</th>
+                    <th>Tổng tiền thanh toán</th>
+                    <th>Tổng tiền thuế GTGT</th>
+                    <th>Đã giữ</th>
+                    <th>Đã hủy</th>
+                    <th>Lý do hủy</th>
+                    <th>Cần xuất ngay</th>
+                    <th>Cần lấy hóa đơn</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in list_pochuaxuly">
+                    <td>{{item.MA_SO_PO}}</td>
+                    <td>{{item.NGAY_LEN_PO | date : 'dd/MM/yyyy'}}</td>
+                    <td>{{item.TEN_LIEN_HE}}</td>
+                    <td>{{item.TEN_CONG_TY}}</td>
+                    <td>{{item.HINH_THUC_THANH_TOAN}}</td>
+                    <td>{{item.TONG_TIEN_HANG | currency: '' : 0}}</td>
+                    <td>{{item.SO_TIEN_VIET_BANG_CHU}}</td>
+                    <td>{{item.NGAY_GIAO_HANG | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{item.DIA_DIEM_GIAO_HANG}}</td>
+                    <td>{{item.HO_VA_TEN}}</td>
+                    <td><input type="checkbox" ng-model="item.DA_BAN_HANG" ng-disabled="true"/></td>
+                    <td>{{item.TONG_TIEN_THANH_TOAN | currency: '' : 0}}</td>
+                    <td>{{item.TONG_TIEN_THUE_GTGT | currency: '' : 0}}</td>
+                    <td><input type="checkbox" ng-model="item.DA_GIU" ng-disabled="true"/></td>
+                    <td><input type="checkbox" ng-model="item.DA_HUY" ng-disabled="true"/></td>
+                    <td>{{item.LY_DO_HUY}}</td>
+                    <td><input type="checkbox" ng-model="item.CAN_XUAT_NGAY" ng-disabled="true"/></td>
+                    <td><input type="checkbox" ng-model="item.CAN_LAY_HOA_DON" ng-disabled="true"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

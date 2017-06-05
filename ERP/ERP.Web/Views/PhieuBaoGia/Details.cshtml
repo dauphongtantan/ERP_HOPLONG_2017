@@ -1,0 +1,361 @@
+﻿@model ERP.Web.Models.Database.BH_BAO_GIA
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<link rel="shortcut icon" type="image/ico" href="~/logo_hoplong.png">
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link href="~/Content/download/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/self-writing/css/nav_hoplong_multilevel.css" rel="stylesheet" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Theme style -->
+<link href="~/Content/download/dist/css/AdminLTE.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+     folder instead of downloading all of them to reduce the load. -->
+
+<link href="~/Content/download/bootstrap/css/layout_all.css" rel="stylesheet" />
+<link href="~/Content/self-writing/css/Layout-CSS.css" rel="stylesheet" />
+<link href="~/Content/self-writing/css/LayoutHL.css" rel="stylesheet" />
+<script src="~/Content/download/plugins/ckeditor/ckeditor.js"></script>
+<script src="~/Content/download/plugins/ckfinder/ckfinder.js"></script>
+<script src="~/Content/download/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="~/Content/download/angularjs/angular.min.js"></script>
+<script src="~/Content/self-writing/js/app.js"></script>
+<script src="~/Content/self-writing/js/Service.js"></script>
+<script src="~/Content/self-writing/js/Controller.js"></script>
+<script src="~/Content/download/angularjs/dirPagination.js"></script>
+<script src="~/Content/download/moment.min.js"></script>
+<script src="~/Content/download/date_directive.js"></script>
+
+
+<script src="~/Content/download/angular-ui/build/angular-ui.min.js"></script>
+<script src="~/Content/download/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="~/Content/download/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+<script src="~/Content/download/bootstrap-datetimepicker.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="~/Content/download/angular-smart-table/angular-smart-table/dist/smart-table.js"></script>
+
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script src="~/Content/self-writing/js/Controllers/PhieuBaoGiaCtrl.js"></script>
+<script src="~/Content/self-writing/js/Services/PhieuBaoGiaService.js"></script>
+<script src="~/Content/download/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="~/Content/self-writing/pagination.js"></script>
+<script src="~/Content/download/dist/js/app.min.js"></script>
+<script src="~/Content/download/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/download/plugins/fastclick/fastclick.js"></script>
+
+<script src="~/Content/self-writing/js/nav_hoplong_multilevel.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
+<style>
+    td,tr,th{
+        border: 1px solid black !important;
+    }
+    .no_border{
+        border: none !important;
+    }
+    .no_border td{
+        border: none !important;
+    }
+    .border-bottom{
+        border-bottom: none !important;
+    }
+    .content{
+        font-size: 12px;
+    }
+</style>
+
+<div ng-app="myApp" ng-controller="PhieuBaoGiaCtrl">
+    <input type="hidden" id="username" name="salehienthoi" value="@Session["USERNAME"]" />
+    <input type="hidden" id="macongty" name="salehienthoi" value="@Session["MA_CONG_TY"]" />
+    <div class="content" ng-repeat="item in list_duyetbaogia" id="Grid"> 
+
+        <div class="col-md-6">
+            <table>
+                <tr class="border-bottom">
+                    <td colspan="9">
+                        <div class="col-md-12">
+                            <div style="display:inline-block;float:left;">
+                                <img src="~/logo_hoplong.png" height="50" width="100" />
+                            </div>
+                            <div style="display:inline-block;float:left">
+                                <h4><b>CÔNG TY CỔ PHẦN CÔNG NGHỆ HỢP LONG</b></h4>
+                                <p>Head office: 412 Trần Khát Chân-Hai Bà Trưng-Hà Nội - Tel: 1900.6536 - Fax: 043.661.7560</p>
+                                <p>HCM office: 68 Nguyễn Huệ - Quận 1 - TP.Hồ Chí Minh</p>
+                                <p>ĐN office: 178 Trường Sơn - Cẩm Lệ - TP.Đà Nẵng</p>
+                                <p>Email: info@hoplongtech.com.vn  -  https://hoplongtech.com</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <hr style="border: 2px solid lightskyblue" />
+                        <h4 class="text-center"><b>QUOTATION</b></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <div class="col-md-12">
+                            <label>Khách hàng:  {{item.TEN_CONG_TY}}</label>
+
+                            <p>Người liên hệ:  {{item.NGUOI_LIEN_HE}}</p>
+
+
+                            <p>Văn phòng giao dịch:  {{item.VAN_PHONG_GIAO_DICH}}</p>
+
+                            <p>Địa chỉ xuất hóa đơn:  {{item.DIA_CHI_XUAT_HOA_DON}}</p>
+
+
+                            <p>
+                                Tel: {{item.HOTLINE}}
+                                &nbsp;    Fax: {{item.FAX}}
+                            </p>
+
+                            <p>Email: {{EMAIL_CA_NHAN}}</p>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="col-md-12">
+
+                            <p><b>Quotation Number</b>:  {{item.SO_BAO_GIA}}</p>
+
+                            <p>Người liên hệ:  {{item.TEN_NGUOI_BAO_GIA}}</p>
+
+                            <p>Tel: {{item.SDT_NGUOI_BAO_GIA}}</p>
+
+                            <p>Email: {{item.EMAIL_NGUOI_BAO_GIA}}</p>
+
+                            <p id="phivanchuyen" style="display: none;">{{item.PHI_VAN_CHUYEN}}</p>
+                            <div class="col-md-12">&nbsp;</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <p>We are the leading supplier for industrial products.Hereby we would like to qoute for your inquiry as follow:</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>No.</th>
+                    <th>Description of goods<br /><span style="font-weight:normal">(Mô tả chi tiết hàng hóa)</span></th>
+                    <th>Model<br /><span style="font-weight:normal">(Mã hàng)</span></th>
+                    <th>Maker<br /><span style="font-weight:normal">(Nhà sản xuất)</span></th>
+                    <th>Qty<br /><span style="font-weight:normal">(Số lượng)</span></th>
+                    <th>UOM<br />   <span style="font-weight:normal">(Đơn vị)</span></th>
+                    <th>U.price<br />(VNĐ)</th>
+                    <th>Total Amount<br />(VNĐ)</th>
+                    <th>Delivery time</th>
+                </tr>
+                <tr ng-repeat="detail in Detail.ListAdd">
+                    <td>
+                        {{$index + 1}}
+                    </td>
+                    <td>
+                        <div>
+                            {{detail.TEN_HANG}}
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            {{detail.MA_HANG}}
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            {{detail.MA_NHOM_HANG}}
+                        </div>
+                        <input type="number" ng-model="detail.SO_LUONG" readonly class="form-control" ng-change="kiemtra(item)" style="display:none">
+                    </td>
+                    <td class="text-center">
+                        <div>
+                            {{detail.SO_LUONG}}
+                        </div>
+                        <input type="number" ng-model="detail.DON_GIA" readonly class="form-control" ng-change="kiemtra(item)" style="display:none">
+                    </td>
+                    <td class="text-center">
+                        <div>
+                            {{detail.DON_VI_TINH}}
+                        </div>
+                        <input type="number" ng-model="detail.CHIET_KHAU" readonly class="form-control" ng-change="kiemtra(item)" style="display:none">
+                        <input type="text" ng-model="detail.CACH_TINH_THANH_TIEN" readonly class="form-control" style="display:none">
+                    </td>
+                    <td class="text-center">
+                        {{detail.DON_GIA_SAU_CHIET_KHAU}}
+                    </td>
+                    <td class="text-center">
+                        {{detail.THANH_TIEN | currency: '':0}}
+                        <input ng-model="detail.THANH_TIEN" class="form-control" readonly type="hidden" ng-disabled="true" style="display:none" />
+                    </td>
+                    <td class="text-center">
+                        <div>
+                            {{detail.THOI_GIAN_GIAO_HANG}}
+                        </div>
+                        <input type="number" ng-model="detail.CK_VAT" readonly class="form-control" ng-change="kiemtra(item)" style="display:none">
+                        <input ng-model="detail.TIEN_VAT" ng-disabled="true" readonly class="form-control" type="hidden" style="display:none" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <label class="col-md-3 text-left">Total</label>
+                        <label class="col-md-9 text-right">Tổng tiền hàng</label>
+                    </td>
+                    <td class="text-center">
+                        {{tong_thanh_tien | currency: '':0}}
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <label class="col-md-3 text-left">VAT 10%</label>
+                        <label class="col-md-9 text-right">Thuế VAT 10%</label>
+                    </td>
+                    <td class="text-center">
+                        {{tong_tien_VAT | currency: '':0}}
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <label class="col-md-3 text-left">Grand Total</label>
+                        <label class="col-md-9 text-right">Tổng cộng(đã tính phí vận chuyển nếu có)</label>
+                    </td>
+                    <td class="text-center">
+                        {{BangBaoGia.tong_tien | currency: '':0}}
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr class="no_border">
+                    <td colspan="9">
+                        <h3><i><b style="text-decoration: underline">TERM & CONDITION:</b></i></h3>
+                    </td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="9">
+                        * Delivery time: (note)
+                    </td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="3">
+                        * Delivery place:
+                    </td>
+                    <td colspan="3">
+                        [] At customer's office
+                    </td>
+                    <td colspan="3">
+                        giao tại văn phòng bên mua
+                    </td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="3">
+                        địa điểm giao hàng
+                    </td>
+                    <td colspan="3">
+                        [] At customer's warehouse
+                    </td>
+                    <td colspan="3">
+                        giao tại kho bên mua
+                    </td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="3">
+                        * Payment method
+                    </td>
+                    <td colspan="3">
+                        [] Cash in advance
+                    </td>
+                    <td colspan="3">
+                        thanh toán tiền mặt
+                    </td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="3">
+                        phương thức thanh toán
+                    </td>
+                    <td colspan="3">
+                        [] 100% payment after deliver
+                    </td>
+                    <td colspan="3">
+                        thanh toán sau khi nhận hàng
+                    </td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3">
+                        thanh toán chuyển khoản
+                    </td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="3">* Validity</td>
+                    <td colspan="3">30 days(from date of it)</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="3">* Warranty</td>
+                    <td colspan="3">12 months(for technical error of manufacturer)</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr class="no_border">
+                    <td colspan="5">
+                        <h3><b>CUSTOMER CONFIRMATION</b></h3>
+                        <p>(Sign,write full name & put the seal)</p>
+                    </td>
+                    <td colspan="4">
+                        <h3><b>HopLongTech</b></h3>
+                        <p>(Sign & write full name)</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+  <!-- /dashboard content -->
+
+
+        <input type="button" value="PrintQuotation" onclick="javascript:printDiv('Grid')" />
+    </div>
+
+
+</div>
+<a href="@Url.Action("DownloadActionAsPDF", "PhieuBaoGia")">in trang</a>
+
+    <script language="javascript" type="text/javascript">
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+              "<html><head><title></title></head><body>" +
+              divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+
+        }
+    </script>
+

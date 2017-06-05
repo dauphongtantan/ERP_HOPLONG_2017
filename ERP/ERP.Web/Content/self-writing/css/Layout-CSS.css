@@ -1,0 +1,38 @@
+﻿input#searchtextbox::-webkit-input-placeholder {color:white;}
+input#searchtextbox::-moz-placeholder          {color:white;}
+input#searchtextbox:-moz-placeholder           {color:white;}
+input#searchtextbox:-ms-input-placeholder      {color:white;}
+
+.navbar-nav>li>a {
+    color: white;
+}
+.user a{
+    display: inline-block;
+    float: left;
+}
+#search-btn{    
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background: transparent;
+}
+#searchtextbox{
+display:inline-block;
+float:left;
+background: #3C8DBC;
+color: white;
+border: 0.5px solid rgba(221, 221, 221, 0.3);
+}
+
+.logodaily{
+    border-right: 0.5px solid rgba(221, 221, 221, 0.3);
+}
+
+.md-active{
+    z-index: 9999 !important;
+}
+
+md-input-container{
+    margin: 0px !important;
+}

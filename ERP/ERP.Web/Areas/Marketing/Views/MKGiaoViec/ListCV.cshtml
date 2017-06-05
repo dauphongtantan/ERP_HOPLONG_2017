@@ -1,0 +1,142 @@
+﻿@model IEnumerable<ERP.Web.Models.Database.NV_LICH_LAM_VIEC>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/assets/css/core.css" rel="stylesheet" />
+<link href="~/Content/assets/css/colors.css" rel="stylesheet" />
+<link href="~/Content/self-writing/css/LichLamViecNhanVien.css" rel="stylesheet" />
+<script src="~/Content/self-writing/js/Controllers/LichLamViecNhanVienCtrl.js"></script>
+
+<div class="panel-heading">
+    <marquee width="80%">Bạn đang xem danh mục List công việc chưa hoàn thành.</marquee>
+</div>
+<div ng-app="myApp" ng-controller="LichLamViecNhanVienCtrl">
+    <input type="hidden" id="isadmin" value="@Session["IS_AMIN"]" />
+    <input type="hidden" id="username" value="@Session["USERNAME"]" />
+    <input type="hidden" id="maphongban" value="@Session["MA_PHONG_BAN"]" />
+
+    <div class="content">
+        <!--Danh sách Công việc được giao-->
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="example" class="table" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ngày giao việc</th>
+                            <th>Nội dung công việc</th>
+                            <th>Phương án xử lý</th>
+                            <th>Thời gian hoàn thành</th>
+                            <th>Người giao việc</th>
+                            <th>Nhân viên thực hiện</th>
+                            <th>Hủy công việc</th>
+                            <th>Trạng thái</th>
+                            <th>Ghi chú</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="item in filtered = (ListCVChuaHoanThanh | itemsPerPage:15)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+
+                            <td>{{item.NGAY_GIAO_VIEC | date: 'dd/MM/yyyy'}}</td>
+                            <td><p ng-hide="editMode" ng-model="item.NOI_DUNG_CONG_VIEC">{{item.NOI_DUNG_CONG_VIEC}}</p>
+                                <textarea ng-model="item.NOI_DUNG_CONG_VIEC" ng-show="editMode" placeholder="Ghi chú"></textarea>
+                            </td>
+                            <td>
+                                <p ng-hide="editMode" ng-model="item.PHUONG_AN_XU_LY">{{item.PHUONG_AN_XU_LY}}</p>
+                                <textarea ng-model="item.PHUONG_AN_XU_LY" ng-show="editMode" placeholder="Phương án xử lý"></textarea>
+                            </td>
+                            <td><p ng-hide="editMode" ng-model="item.NGAY_HOAN_THANH">{{item.NGAY_HOAN_THANH}}</p>
+                                <input type="text" ng-model="item.NGAY_HOAN_THANH" ng-show="editMode" placeholder="Ngày hoàn thành"/>
+                            </td>
+                            <td>{{item.NGUOI_GIAO_VIEC}}</td>
+                            <td>{{item.NGUOI_NHAN_VIEC}}</td>
+                            <td><input type="checkbox" ng-model="item.HUY_CONG_VIEC" ng-disabled="true" /></td>
+                            <td class="text-left">{{item.TRANG_THAI}}</td>
+                            <td class="text-left">
+                                <p ng-hide="editMode" ng-model="item.GHI_CHU">{{item.GHI_CHU}}</p>
+                                <textarea ng-model="item.GHI_CHU" ng-show="editMode" placeholder="Ghi chú"></textarea>
+                            </td>
+                            <td>
+                                <button type="submit" ng-hide="editMode" ng-click="editMode = true; edit_giao_viec(item)" class="btn btn-default">Edit</button>
+                                <button type="submit" ng-show="editMode" ng-click="editMode = false; EditLichLamViecNV(item)" class="btn btn-default">Save</button>
+                                <button type="submit" ng-show="editMode" ng-click="editMode = false; cancel_giao_viec(item)" class="btn btn-default">Cancel</button>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete_item" ng-click="deleteitem(item)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="10" style="border: none !important">
+                                <dir-pagination-controls max-size="12" style="float:right;"
+                                                         direction-links="true"
+                                                         boundary-links="true">
+                                </dir-pagination-controls>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal delete -->
+        <div class="modal fade" id="delete_item" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="myForm" novalidate>
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend>Delete Maker</legend>
+                                <center>Are you sure you want to delete </center>
+                                <p></p>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="delete"></label>
+                                    <div class="col-md-8">
+                                        <button id="delete" name="delete" class="btn" ng-click="delete_lichlamviecNV(item)" data-dismiss="modal">Delete</button>
+                                        <button id="exit" name="exit" class="btn" data-dismiss="modal">Exit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .button_gv {
+        border-radius: 3px !important;
+        float: left;
+        height: 30px;
+        margin-right: 3px;
+        padding: 0 10px;
+        background-color: #38B8E6;
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-top: -5px;
+    }
+
+    .form-control {
+        border: none !important;
+    }
+
+    ::placeholder {
+        font-size: 11px;
+        font-weight: bolder;
+        font-style: italic;
+    }
+
+    th {
+        background-color: #1191BF;
+        color: white;
+    }
+</style>
+

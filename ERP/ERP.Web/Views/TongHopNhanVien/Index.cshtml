@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="panel content panel-default col-md-12" ng-controller="tonghopnvCtrl" ng-app="myApp">
+    <input type="hidden" value="@Session["MA_CONG_TY"]" id="macongty"/>
+    <div class="panel-heading title"><h1>Danh sách nhân viên Hợp Long</h1></div>
+    <div class="panel-body">
+        <div id="quick-access" style="text-align:center;margin-bottom: 20px;">
+            <form class="form-inline quick-search-form" role="form" action="#">
+                <div class="form-group" style="width: 100%">
+                    <input type="text" style="width: 60%;border: 1px solid #00BFFF;border-radius: 5px;" class="form-control" placeholder="Nhập tên nhân viên muốn tìm kiếm vào đây" ng-model="search_text">
+                </div>
+            </form>       
+        </div>
+        <div dir-paginate="item in filtered = (listtonghop  | filter: {HO_VA_TEN : search_text} |itemsPerPage: 15)" class="hover col-md-2" style="margin: 20px;padding:5px;border: 1px solid #DCF5FC;box-shadow:3px 3px 3px #DCF5FC;color: #00BFFF">
+            <div>
+                <a href="/UserDetails/Details/{{item.USERNAME}}"><img ng-src="~/Content/Images/Avatar/{{item.AVATAR}}" style="width: 100%;height: 20%;" /></a>
+            </div>
+            <div style="text-align:center;  padding-top: 10px; font-size: 20px;">
+                <a href="/UserDetails/Details/{{item.USERNAME}}">{{item.HO_VA_TEN}}</a>
+            </div>
+            <div style="text-align:center">
+                {{item.TEN_PHONG_BAN}}
+            </div>
+        </div>
+    </div>
+    <div>
+        <dir-pagination-controls  max-size="12" style="float:right;"
+                                 direction-links="true"
+                                 boundary-links="true">
+        </dir-pagination-controls>
+    </div>
+</div>
+

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ERP.Web.Models.Database.MH_YEU_CAU_HOI_GIA>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MA_HANG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MA_CHUAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MA_KHACH_ORDER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THONG_SO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SO_LUONG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GHI_CHU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAY_HOI_GIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRANG_THAI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCTC_CONG_TY.TEN_CONG_TY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCTC_NHAN_VIEN.GIOI_TINH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCTC_NHAN_VIEN1.GIOI_TINH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HH_NHOM_VTHH.CHUNG_LOAI_HANG)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MA_HANG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MA_CHUAN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MA_KHACH_ORDER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THONG_SO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SO_LUONG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GHI_CHU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGAY_HOI_GIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRANG_THAI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCTC_CONG_TY.TEN_CONG_TY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCTC_NHAN_VIEN.GIOI_TINH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCTC_NHAN_VIEN1.GIOI_TINH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HH_NHOM_VTHH.CHUNG_LOAI_HANG)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

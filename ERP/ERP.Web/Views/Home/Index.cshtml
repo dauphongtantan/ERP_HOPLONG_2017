@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div ng-app="myApp" ng-controller="danhmucCtrl">
+    <div class="panel content panel-default col-md-9" style="overflow: auto;">
+        <div class="panel-heading title">
+            <span><b>Mục tiêu 1: </b>Phần mềm phải hỗ trợ được mọi nhân viên làm việc theo quy trình thông minh,  khoa học hơn nhằm đạt  hiệu quả  và năng suất cao hơn. </span>
+            <span ng-hide="true"><b>Mục tiêu 2: </b>Tự động tương tác, giao dịch với khách hàng </span>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="item in listpost | orderBy : '-NGAY_DANG_BAI'" class="col-md-12" style="margin-bottom: 20px;padding: 20px;border: 1px solid #DCF5FC;box-shadow: 3px 3px 3px #DCF5FC; border-radius:5px">
+                <div class=col-md-3>
+                    <a href="/Home/Details/{{item.MA_BAI_VIET}}"><img ng-src="~/Content/Images/BaiViet/{{item.ANH_BAI_VIET}}" style="width: 100%;height: 150px;" /></a>
+                </div>
+                <div class=col-md-9>
+                    <a href="/Home/Details/{{item.MA_BAI_VIET}}"><h2 style="color: #097be0;font-weight: bold; font-family:Yanone Kaffeesatz">{{item.TIEU_DE_BAI_VIET}}</h2></a>
+                    <p style="height: 60px; overflow: hidden;word-wrap: break-word" class="col-md-12" ng-bind-html="item.NOI_DUNG_BAI_VIET | unsafe"></p>
+                    <p class="col-md-4" style="color: #097be0"><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{{item.NGAY_DANG_BAI | date : 'dd/MM/yyyy'}}</p>
+                    <a class="col-md-4" style="color: #097be0" href="/UserDetails/Details/{{item.NGUOI_DANG_BAI}}"><i class="fa fa-user" aria-hidden="true" style="margin-right: 5px;"></i>{{item.HO_VA_TEN}}</a>
+                    @*<a href="#" onclick="DeleteBaiViet({{item.MA_BAI_VIET}})">Xóa</a>*@
+                     
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel content panel-default col-md-3">
+        <div class="panel-heading title">Danh mục</div>
+        <div class="panel-body">
+            @*<ul>
+                <li ng-repeat="list in danhsachdanhmuc" ng-click="transfer(list.MA_DANH_MUC)" style="cursor: pointer;list-style-type: none;color: #097be0; border-bottom: 1px solid #0099FF"><h4>{{list.TEN_DANH_MUC}}</h4></li>
+            </ul>*@
+            <ul>
+                <li class="treeview" ng-click="transfer('01')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-flag-checkered"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Thông báo nội bộ</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('02')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-bell"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Thông báo kinh doanh</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('03')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-file"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Tài liệu đào tạo</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('04')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-arrows"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Nội quy công ty</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('05')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-asterisk"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Hoạt động giải trí</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('06')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-bookmark"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Hoạt động kinh doanh</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('07')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-cubes"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Dự án triển khai</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('08')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-share"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Chia sẻ</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('09')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-thumbs-up"></i>
+                        <span style="font-size:14px;font-weight: bold;padding-left: 6px;">Chính sách đãi ngộ</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-click="transfer('10')" style="cursor: pointer;list-style-type: none;color: #097be0; padding-bottom: 10px;">
+                    <a href="#">
+                        <i class="fa fa-gift"></i>
+                        <span style="font-size:14px; font-weight: bold;padding-left: 6px;">Khuyến mãi sản phẩm</span>
+                    </a>
+                </li>
+            </ul>
+
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    this.DeleteBaiViet = function (idBaiViet) {
+        var a = $('id').val()
+        var response = $http({
+            method: "delete",
+            url: "BaiVietMoi/Delete_BaiViet",
+            params: {
+                id: JSON.stringify(a)
+            }
+        });
+        return response;
+    }
+
+</script>

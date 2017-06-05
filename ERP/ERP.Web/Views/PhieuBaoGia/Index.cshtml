@@ -1,0 +1,129 @@
+﻿@model IEnumerable<ERP.Web.Models.Database.BH_BAO_GIA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAY_BAO_GIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHUONG_THUC_THANH_TOAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HAN_THANH_TOAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HIEU_LUC_BAO_GIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIEU_KHOAN_THANH_TOAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHI_VAN_CHUYEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TONG_TIEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DA_DUYET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DA_TRUNG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DA_HUY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LY_DO_HUY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SALES_BAO_GIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRUC_THUOC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KH_LIEN_HE.MA_KHACH_HANG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BH_DON_HANG_DU_KIEN.MA_KHACH_HANG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KH.TEN_CONG_TY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCTC_NHAN_VIEN.GIOI_TINH)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGAY_BAO_GIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHUONG_THUC_THANH_TOAN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HAN_THANH_TOAN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HIEU_LUC_BAO_GIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIEU_KHOAN_THANH_TOAN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHI_VAN_CHUYEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TONG_TIEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DA_DUYET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DA_TRUNG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DA_HUY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LY_DO_HUY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SALES_BAO_GIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRUC_THUOC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KH_LIEN_HE.MA_KHACH_HANG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BH_DON_HANG_DU_KIEN.MA_KHACH_HANG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KH.TEN_CONG_TY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCTC_NHAN_VIEN.GIOI_TINH)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SO_BAO_GIA }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SO_BAO_GIA }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SO_BAO_GIA })
+        </td>
+    </tr>
+}
+
+</table>

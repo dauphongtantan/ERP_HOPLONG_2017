@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "TimKiem_KhachHang";
+}
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link href="~/Content/self-writing/css/HangHoaHL.css" rel="stylesheet" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="~/Content/self-writing/js/Services/KhachChuaGiaoDichService.js"></script>
+<script src="~/Content/self-writing/js/Controllers/KhachChuaGiaoDichCtrl.js"></script>
+
+<div class="panel-heading">
+    <marquee width="80%">Bạn đang xem danh mục tìm kiếm khách hàng.</marquee>
+</div>
+<br />
+<div class="tab-pane fade in" ng-app="myApp" ng-controller="KhachChuaGiaoDichCtrl">
+    <input type="hidden" id="username" name="username" value="@Session["USERNAME"]">
+    <div id="quick-access" style="padding-bottom: 20px;">
+        <form class="form-inline quick-search-form" role="form" action="#">
+            <div class="form-group" style="width: 90%">
+                <input type="text" style="width: 60%" class="form-control" placeholder="Type System Code You Want To Search Here" ng-model="search_text" id="timkiem">
+
+                <button type="button" style="border-radius: 5px" class="btn btn-info" ng-model="find">Tìm kiếm</button>
+            </div>
+        </form>
+    </div>
+    <button type="button" class="button_hanghoa fa fa-stack-overflow" onclick="location.href='/ChuyenSale/Index';"><span>Chuyển Sale</span></button>
+    <button type="button" class="button_hanghoa fa fa-search-plus" onclick="location.href = '/KhachHang/TimKiem_KhachHang';"><span>Tìm kiếm khách trên toàn hệ thống</span></button>
+    <button type="button" class="button_hanghoa fa fa-frown-o" onclick="location.href = '/KhachHang/KhachChuaGiaoDich';"><span>Danh sách khách chưa có giao dịch</span></button>
+
+    <table id="example" class="table " cellspacing="0" name="tblhanghoa">
+        <thead>
+            <tr>
+                <th>MÃ KHÁCH HÀNG</th>
+                <th>TÊN CÔNG TY</th>
+                <th>TỈNH</th>
+                <th>QUỐC GIA</th>
+                <th>SALE PHỤ TRÁCH</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr dir-paginate-start="item in listkhachchuagiaodich | itemsPerPage: 30 " class="hover" ng-class-odd="'odd'" ng-class-even="'even'" pagination-id="timkiem">
+                <td class="text-left">{{item.MA_KHACH_HANG}}</td>
+                <td class="text-left">{{item.TEN_CONG_TY}}</td>
+                <td class="text-left">{{item.TINH}}</td>
+                <td class="text-left">{{item.QUOC_GIA}}</td>
+                <td class="text-left">{{item.SALES_PHU_TRACH}}</td>
+            </tr>
+            <tr dir-paginate-end=""></tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9" style="border: none !important">
+                    <dir-pagination-controls pagination-id="timkiem" max-size="12" style="float:left;"
+                                             direction-links="true"
+                                             boundary-links="true">
+                    </dir-pagination-controls>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+

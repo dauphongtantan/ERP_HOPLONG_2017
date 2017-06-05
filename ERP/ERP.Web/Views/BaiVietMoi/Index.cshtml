@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/self-writing/css/BaiVietMoi.css" rel="stylesheet" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<div ng-app="myApp" ng-controller="danhmucCtrl">
+    <div class="col-md-9 ckeditor">
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="name">Tiêu đề </label>
+            <div class="col-md-10">
+                <input type="text" placeholder="Tiêu đề " class="form-control input-md" ng-model="tieude">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label ckeditor" for="name">Ghi chú: </label>
+            <div class="col-md-10 ckeditor">
+                <textarea id="noidung" name="noidung" placeholder="Note" class="form-control input-md" ng-model="noidung"></textarea>
+            </div>
+        </div>
+        <script>
+            CKEDITOR.replace('noidung', {
+                height: 600,
+            });
+        </script>
+    </div>
+    <input type="hidden" id="username" value="@Session["USERNAME"]" />
+    <div class="col-md-3 ckeditor">
+        <div class="listdanhmuc">
+            <div class="detail_danhmuc" ng-repeat="danhmuc in danhsachdanhmuc">
+                <input type='checkbox' value="{{danhmuc.MA_DANH_MUC}}" check-list='checked_fruits' class="{{danhmuc.MA_DANH_MUC}}" /><span>{{danhmuc.TEN_DANH_MUC}}</span><br />
+            </div>
+        </div>
+        <form action="/BaiVietMoi/Index" ng-controller="imgCtrl" method="post">
+            @Html.AntiForgeryToken()
+            <input type='file' name="files" id="imgInp"/>
+            <img id="blah" src="#" height="250" width="400" />
+            <input type="submit" value="Đăng bài viết" ng-click="save()" style="margin-top: 30px;" />
+        </form>
+        
+    </div>
+</div>
+
+<script>
+    (function () {
+
+        var bar = $('.progress-bar');
+        var percent = $('.progress-bar');
+        var status = $('#status');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+
+    })();
+</script>

@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "TimKiem_KhachHang";
+}
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link href="~/Content/self-writing/css/HangHoaHL.css" rel="stylesheet" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="~/Content/self-writing/js/Services/TimKhachHangService.js"></script>
+<script src="~/Content/self-writing/js/Controllers/TimKhachHangCtrl.js"></script>
+
+<div class="panel-heading">
+    <marquee width="80%">Bạn đang xem danh mục tìm kiếm khách hàng.</marquee>
+</div>
+<br />
+<div class="tab-pane fade in" ng-app="myApp" ng-controller="TimKhachHangCtrl">
+    <div id="quick-access" style="padding-bottom: 20px;">
+        <form class="form-inline quick-search-form" role="form" action="#">
+            <div class="form-group" style="width: 90%">
+                <input type="text" style="width: 60%" class="form-control" placeholder="Nhập Email hoặc SĐT hoặc MST của KH cần tìm" ng-model="search_text">
+
+                <button type="button" style="border-radius: 5px" class="btn btn-info" ng-model="find" ng-click="timkiemkhachhang(search_text)">Tìm kiếm</button>
+            </div>
+        </form>
+    </div>
+    <input type="hidden" id="salehienthoi" name="salehienthoi" value="@Session["USERNAME"]" />
+    <input type="hidden" id="maphongban" name="maphongban" value="@Session["MA_PHONG_BAN"]" />
+    <input type="hidden" id="macongty" name="macongty" value="@Session["MA_CONG_TY"]" />
+    <input type="hidden" id="isadmin" name="isadmin" value="@Session["IS_AMIN"]" />
+    <div id="quick-access" style="padding-bottom: 20px;">
+        <form class="form-inline quick-search-form" role="form" action="#">
+           
+            <table id="example" class="table ">
+                <tr ng-repeat="item in filtered">
+                    <td><label>Sale phụ trách hiện thời</label></td>
+                    <td>{{item.SALES_PHU_TRACH}}</td>
+                    <td>{{item.TEN_CUA_SALES_PHU_TRACH}}</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <br />
+</div>
+

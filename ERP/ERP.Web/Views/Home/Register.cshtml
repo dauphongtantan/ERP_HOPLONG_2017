@@ -1,0 +1,119 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+    <!DOCTYPE html>
+    <html lang="en" >
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Website CSS style -->
+        <link href="~/Content/download/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- Website Font style -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link href="~/Content/self-writing/css/style.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        <link href="~/Content/self-writing/css/Login.css" rel="stylesheet" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+        <script src="~/Content/self-writing/js/Controllers/RegisterCtrl.js"></script>
+
+
+        
+        
+        <title>Admin</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row main">
+                <div class="main-login main-center">
+                    <center ><h4 style="line-height: 30px; font-family:'Times New Roman'">ĐĂNG KÝ TÀI KHOẢN CHECK GIÁ TẠI HOPLONGTECH</h4></center>
+                    <div> <label style="color:">@ViewBag.error</label></div>
+                    <form action="/Home/Register" method="post">
+
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Họ và tên(*)</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Nhập họ tên đầy đủ" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="cols-sm-2 control-label">Email(*)</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Nhập email của bạn" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="cols-sm-2 control-label">Số điện thoại(*)</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại của bạn" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="cols-sm-2 control-label">Mật khẩu(*)</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm" class="cols-sm-2 control-label">Xác nhận mật khẩu(*)</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Nhập lại mật khẩu vừa nhập" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <input type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" value="Register"/>
+                        </div>
+                        <div class="form-group" style="padding-bottom:5px;">
+                            <a href="/Home/Login"><label style="color:white" class="cols-sm-2 control-label">Go to Login</label></a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            var password = document.getElementById("password"), confirm_password = document.getElementById("confirmpassword");
+
+            function validatePassword() {
+                if (password.value != confirm_password.value) {
+                    confirm_password.setCustomValidity("Passwords Don't Match");
+                } else {
+                    confirm_password.setCustomValidity('');
+                }
+            }
+
+            password.onchange = validatePassword;
+            confirm_password.onkeyup = validatePassword;
+        </script>
+
+    </body>
+</html>
+

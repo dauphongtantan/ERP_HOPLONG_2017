@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Content/self-writing/js/Services/HangCanDatService.js"></script>
+<script src="~/Content/self-writing/js/Controllers/HangCanDatCtrl.js"></script>
+<div ng-controller="HangCanDatCtrl" ng-app="myApp">
+    <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+    <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
+    <div class="content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã số PO</th>
+                    <th>Mã điều chỉnh</th>
+                    <th>Mã khách hàng</th>
+                    <th>Khách hàng</th>
+                    <th>Người liên hệ</th>
+                    <th>Đơn vị tính</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                    <th>Ngày giao hàng</th>
+                    <th>Địa điểm giao hàng</th>
+                    <th>Nhân viên quản lý</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in list_hangcandat">
+                    <td>{{item.MA_SO_PO}}</td>
+                    <td>{{item.MA_DIEU_CHINH}}</td>
+                    <td>{{item.MA_KHACH_HANG}}</td>
+                    <td>{{item.TEN_CONG_TY}}</td>
+                    <td>{{item.TEN_LIEN_HE}}</td>
+                    <td>{{item.DVT}}</td>
+                    <td>{{item.SO_LUONG}}</td>
+                    <td>{{item.DON_GIA  | currency : '' : 0}}</td>
+                    <td>{{item.THANH_TIEN_HANG | currency : '' : 0}}</td>
+                    <td>{{item.NGAY_GIAO_HANG | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item.DIA_DIEM_GIAO_HANG}}</td>
+                    <td>{{item.HO_VA_TEN}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

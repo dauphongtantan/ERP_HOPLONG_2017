@@ -1,0 +1,31 @@
+﻿@{Layout = null;
+
+}
+<div class="container dynamicTile" ng-app="myApp" ng-controller="chitietbaivietCtrl">
+    <style>
+        .AUTONICS {
+            background-color: red !important;
+        }
+    </style>
+    <div class="row ">
+        <div class="col-sm-2 col-xs-4" ng-repeat="item in list_baiviet" style="margin-bottom: 0px !important;">
+            <div id="tile1" class="tile">
+
+                <div class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active" style="height: 269px !important">
+                            <a href="/Home/Details/{{item.MA_BAI_VIET}}"><img ng-src="~/Content/Images/BaiViet/{{item.ANH_BAI_VIET}}" /></a>
+                        </div>
+                        <div class="item" id="{{item.TIEU_DE_BAI_VIET}}" style="height: 269px !important">
+                            <span style="color: white; float: left; margin-top: 35px; margin-left: 10px;margin-right:80px; ">{{item.TIEU_DE_BAI_VIET}} </span>
+                            <span style="color: white; float: left; margin-top: 35px; margin-left: 10px;margin-right:80px">Ngày cập nhật: {{item.NGAY_CAP_NHAT | date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

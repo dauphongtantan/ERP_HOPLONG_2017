@@ -1,0 +1,28 @@
+.margin0 {margin:0;}
+.font13 {font-size: 13px;}
+.font16 {font-size: 16px;}
+.font20 {font-size: 20px;}
+.bg-blue {background: #5BC0DE;}
+.bg-white {background: #fff;}
+.borderRadius3 {border-radius: 3px 3px 0 0;}
+.borderRadius0 {border-radius: 0;}
+.text-white {color: #fff;}
+.bold {font-weight: bold;}
+.border {border: 1px solid #ccc;}
+.borderTopNone {border-top: none;}
+.padding0 {padding: 0px;}
+.padding10 {padding: 10px;}
+.paddingLR10 {padding-left: 10px;padding-right: 10px;}
+.paddingTB10 {padding-top: 10px;padding-bottom: 10px;}
+.marginTA50 {margin-top: -50px;}
+.marginT5 {margin-top: 5px;}
+.marginR15 {margin-right: 15px;}
+.marginR30 {margin-right: 30px;}
+.marginR45 {margin-right: 45px;}
+.width100 {width: 100px;}
+.width200 {width: 200px;}
+.text-blue {color: #5BC0DE;}
+.relative {position: relative;}
+.maxWidth150 {max-width: 150px;}
+.maxWidth120 {max-width: 120px;}
+.maxWidth100 {max-width: 100px;}

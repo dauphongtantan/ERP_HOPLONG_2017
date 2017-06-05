@@ -1,0 +1,33 @@
+﻿
+.ckeditor{
+    margin-top: 15px;
+}
+.danhmuc{
+    display: inline-block;
+    float: left;
+}
+.row-danhmuc{
+    width: 100%;
+    height: 50px;
+}
+.listdanhmuc{
+    width: 100%;
+    height: 250px;
+    overflow: scroll;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+.listdanhmuc .detail_danhmuc{
+    height: 50px;
+    width: 100%;
+}
+.listdanhmuc .detail_danhmuc input{
+    display: inline-block;
+    float: left;
+}
+.listdanhmuc .detail_danhmuc span{
+    display: inline-block;
+    float: left;
+    margin-left: 5px;
+}
+

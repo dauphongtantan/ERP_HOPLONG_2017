@@ -1,0 +1,82 @@
+﻿@model ERP.Web.Models.Database.NV_LICH_LAM_VIEC
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NV_LICH_LAM_VIEC</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TIEU_DE_CONG_VIEC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIEU_DE_CONG_VIEC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAY_THUC_HIEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAY_THUC_HIEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOI_DUNG_CONG_VIEC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOI_DUNG_CONG_VIEC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIA_DIEM_LAM_VIEC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIA_DIEM_LAM_VIEC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HUY_CONG_VIEC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HUY_CONG_VIEC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TRANG_THAI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TRANG_THAI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GHI_CHU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GHI_CHU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCTC_NHAN_VIEN.GIOI_TINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCTC_NHAN_VIEN.GIOI_TINH)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

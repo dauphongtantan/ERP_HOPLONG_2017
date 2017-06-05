@@ -1,0 +1,689 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/self-writing/css/KhachHang.css" rel="stylesheet" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="~/Content/self-writing/js/Services/KhachHangServices.js"></script>
+<script src="~/Content/self-writing/js/Controllers/KhachHangCtrl.js"></script>
+
+<style>
+    #myModal .col-md-12 {
+        margin: 10px 0px;
+    }
+
+    #taikhoan td {
+        padding: 0px !important;
+    }
+
+    #lienhe td {
+        padding: 0px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .thongtinchung input {
+        font-size: 12px;
+    }
+
+    #phanhoikhachhang .table > tbody > tr > td {
+        border-top: none !important;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+<div ng-app="myApp" ng-controller="khachhangCtrl">
+    <!-- Modal them moi lien he -->
+    <input type="hidden" id="salehienthoi" name="salehienthoi" value="@Session["USERNAME"]" />
+    <input type="hidden" id="maphongban" name="maphongban" value="@Session["MA_PHONG_BAN"]" />
+    <input type="hidden" id="macongty" name="macongty" value="@Session["MA_CONG_TY"]" />
+    <input type="hidden" id="isadmin" name="isadmin" value="@Session["IS_AMIN"]" />
+
+
+
+
+    <div class="col-md-12" ng-repeat="item in list_chitietkhachhangnew">
+        <div>
+            <div>
+                <div class="modal-content" style="height: 100%;">
+                    <div class="box-header-title" style="background-color:#1191BF;color: #fff;font-weight: bold;font-size: 18px;padding: 10px;">» Thông tin khách hàng</div>
+                    <div class="modal-body">
+                        <div class="col-md-3">
+                            <center><img ng-src="~/Content/Images/KhachHang/{{item.LOGO}}" style="width: 55%;height: 250px; margin-top: 20px;" /></center>
+                        </div>
+                        <div class="col-md-9">
+                            <div style="margin-bottom: 5%;" class="col-md-12">
+                                <h1 class="col-md-12" style="color: #1191BF; font-size: 35px; margin: 20px 0px 20px 0px;">{{item.TEN_CONG_TY | uppercase}}</h1>
+                                <div class="col-md-2 detail" id="hinhanh_kh">Mã khách hàng: <span id="MA_KHach_HANG">{{item.MA_KHACH_HANG}}</span></div>
+                                <div class="col-md-2 detail" id="hinhanh_kh">Tỉnh: {{item.TINH}}</div>
+                                <div class="col-md-2 detail" id="hinhanh_kh">Quốc gia: {{item.QUOC_GIA}}</div>
+                                <div class="col-md-2" id="hinhanh_kh">Tình trạng hoạt động: {{item.TINH_TRANG_HOAT_DONG}}</div>
+                            </div>
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#chitiet">THÔNG TIN CHI TIẾT</a></li>
+                                    <li><a data-toggle="tab" href="#lienhekhachhang">LIÊN HỆ</a></li>
+                                    <li><a data-toggle="tab" href="#phanhoikhachhang">PHẢN HỒI KHÁCH HÀNG</a></li>
+                                    <li><a data-toggle="tab" href="#thongkemuahang">THỐNG KÊ MUA HÀNG</a></li>
+                                    <li><a data-toggle="tab" href="#policy">POLICY</a></li>
+
+                                    <li><a data-toggle="tab" @*ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017')"*@ href="#congnokhachhang">Công nợ khách hàng</a></li>
+                                    <li><a data-toggle="tab" href="#hosothanhtoan">Hồ sơ thanh toán</a></li>
+                                    <li><a data-toggle="tab" href="#taikhoankhachhang">Tài khoản</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <!--tab công nợ-->
+                                    <div id="congnokhachhang" class="tab-pane fade">
+                                        <div class="col-md-12">
+
+                                            <button ng-repeat="tuancongno in list_danhsachtuancongno" ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,tuancongno); GetDataComment_CongNoKH(item.MA_KHACH_HANG,tuancongno)">{{tuancongno.TUAN_CONG_NO}}</button>
+                                        </div>
+                                        <div class="col-md-12" ng-show="hienthicongno">
+                                            <table class="table" border="1" cellpadding="0" cellspacing="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <th rowspan="2">
+                                                            Ngày hạch toán
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Số chứng từ
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Số hóa đơn
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Mã hàng
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Diễn giải
+                                                        </th>
+                                                        <th colspan="2">
+                                                            Phát sinh
+                                                        </th>
+                                                        <th colspan="2">
+                                                            Số dư
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Số lượng
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Hạn thanh toán
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Nhân viên bán
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Ghi chú
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>
+                                                            Nợ
+                                                        </th>
+                                                        <th>
+                                                            Có
+                                                        </th>
+                                                        <th>
+                                                            Nợ
+                                                        </th>
+                                                        <th>
+                                                            Có
+                                                        </th>
+                                                    </tr>
+                                                    <tr ng-repeat="item in ListCongNoKH">
+                                                        <td>
+                                                            {{item.NGAY_HACH_TOAN | date: 'dd/MM/yyyy'}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.SO_CHUNG_TU}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.SO_HOA_DON}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.MA_HANG}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.DIEN_GIAI}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.PS_NO | number:0}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.PS_CO| number:0}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.SO_DU_NO| number:0}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.SO_DU_CO| number:0}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.SO_LUONG| number:0}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.HAN_THANH_TOAN | date: 'dd/MM/yyyy'}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.TEN_NHAN_VIEN}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.GHI_CHU}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <br />
+                                        <!--COMMENTS-->
+                                        <div class="col-md-12" ng-show="hienthicongno">
+                                            <div class="panel panel-default widget">
+                                                <div class="panel-heading" style="text-align:left">
+                                                    <span><b>Phản hồi gần đây</b></span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item" ng-repeat="item in ListCommentCongNo">
+                                                            <div class="row">
+                                                                <div class="col-xs-2 col-md-1">
+                                                                    <img src="~/Content/Images/Avatar/{{item.AVATAR}}" class="img-circle img-responsive" alt="{{item.TEN_NGUOI_COMMENTS}}" />
+                                                                </div>
+                                                                <div class="col-xs-10 col-md-11">
+                                                                    <div>
+                                                                        <a href="#">
+                                                                            {{item.TEN_NGUOI_COMMENTS}}
+                                                                        </a>
+                                                                        <div class="mic-info">
+                                                                            Ngày: {{item.NGAY_COMMENTS | date: 'dd/MM/yyyy'}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="comment-text">
+                                                                        {{item.NOI_DUNG_COMMENTS}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item" ng-show="add_new_reply">
+                                                            <textarea ng-model="new_comment" placeholder="Comment mới" class="form-control"></textarea>
+                                                            <button ng-click="Comment()" class="btn btn-default">Lưu</button>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" ng-click="open_newcomment()" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> Trả lời</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--END COMMENTS-->
+                                    </div>
+                                    <!--end tab công nợ-->
+                                    <!--Tab chi tiết hàng hóa-->
+                                    <div id="chitiet" class="tab-pane fade in active">
+                                        <div class="col-md-12" style="box-shadow: 3px 3px 3px #ddd">
+                                            <table class="table noborder">
+                                                <tr>
+                                                    <td style="font-weight:bold">Văn phòng giao dịch</td>
+                                                    <td colspan='3'>{{item.VAN_PHONG_GIAO_DICH}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-weight:bold">Địa chỉ xuất hóa đơn:</td>
+                                                    <td colspan='3'>{{item.DIA_CHI_XUAT_HOA_DON}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-weight:bold">Mã số thuế:</td>
+                                                    <td>{{item.MST}}</td>
+                                                    <td style="font-weight:bold">Điều khoản thanh toán</td>
+                                                    <td>{{item.DIEU_KHOAN_THANH_TOAN}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-weight:bold">Điện thoại:</td>
+                                                    <td>{{item.HOTLINE}}</td>
+                                                    <td style="font-weight:bold">Số ngày được nợ</td>
+                                                    <td>{{item.SO_NGAY_DUOC_NO}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-weight:bold">Email:</td>
+                                                    <td>{{item.EMAIL}}</td>
+                                                    <td style="font-weight:bold">Số nợ tối đa</td>
+                                                    <td>{{item.SO_NO_TOI_DA | currency: '' : 0}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-weight:bold">Fax:</td>
+                                                    <td>{{item.FAX}}</td>
+                                                    <td style="font-weight:bold">Website</td>
+                                                    <td>{{item.WEBSITE}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-weight:bold">Ghi chú</td>
+                                                    <td colspan='3' ng-bind-html="item.GHI_CHU | unsafe" class="{{item.MA_KHACH_HANG}}-1"></td>
+                                                </tr>
+                                            </table><br />
+                                            <center>
+                                                <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEdit" ng-click="edit(item)" class="btn fa fa-pencil-square-o">Sửa</button>
+                                                <button id="exit" name="exit" ng-click="showrow = false" class="btn fa fa-sign-out" data-dismiss="modal">Exit</button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div id="lienhekhachhang" class="tab-pane fade">
+                                        <div class="col-md-12">
+                                            <button type="button" ng-click="trasnfer(item)" class="btn fa fa-plus" data-dismiss="modal" data-toggle="modal" data-target="#newlienhe" style="float: right; margin-bottom: 5px;">Thêm mới</button>
+                                            <table class="table">
+                                                <thead class="table-header-popup">
+                                                    <tr>
+                                                        <th style="text-align: center">Người liên hệ</th>
+                                                        <th style="text-align: center">Chức vụ</th>
+                                                        <th style="text-align: center">Email cá nhân</th>
+                                                        <th style="text-align: center">Email công ty</th>
+                                                        <th style="text-align: center">SĐT</th>
+                                                        <th style="text-align: center">Skype</th>
+                                                        <th style="text-align: center">Sale phụ trách</th>
+                                                        <th style="text-align: center">Loại sales</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="lienhe in list_lienhe" ng-click="details(lienhe)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe">{{lienhe.NGUOI_LIEN_HE}}</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe">{{lienhe.CHUC_VU}}</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe">{{lienhe.EMAIL_CA_NHAN}}</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe">{{lienhe.EMAIL_CONG_TY}}</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe">{{lienhe.SDT1}}</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe">{{lienhe.SKYPE}}</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe">{{lienhe.HO_VA_TEN}}</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe" ng-if="lienhe.SALES_MOI == true">Sales mới</td>
+                                                        <td data-dismiss="modal" data-toggle="modal" data-target="#chitietlienhe" ng-if="lienhe.SALES_CU == true">Sales cũ</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr style="border: 2px solid #ddd !important" ng-show="showrow">
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                            <input type="text" placeholder="Tên người liên hệ" ng-model="nguoi_lien_he" style="color: black !important" />
+                                                        </th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                            <input type="text" class="form-control" placeholder="Chức vụ" ng-model="chuc_vu" />
+                                                        </th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                            <input type="text" class="form-control" placeholder="Email cá nhân" ng-model="email_ca_nhan" />
+                                                        </th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                            <input type="text" class="form-control" placeholder="Email công ty" ng-model="email_cong_ty" />
+                                                        </th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                            <input type="text" class="form-control" placeholder="Số điện thoại" ng-model="so_dien_thoai1" />
+                                                        </th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                            <input type="text" class="form-control" placeholder="Skype" ng-model="skype" />
+                                                        </th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+
+                                                            <input type="text" class="form-control" placeholder="Sale phụ trách" ng-model="nvkd.HO_VA_TEN" value="{{nvkd.HO_VA_TEN}}" ng-change="onNhanVienFind()" ng-focus="item.showtable_ho_va_ten = true" ng-blur="item.showtable_ho_va_ten = false">
+                                                            <input type="hidden" class="form-control" ng-model="nvkd.USERNAME" ng-change="onNhanVienFind()" ng-focus="showtable_ho_va_ten = true">
+                                                            <div class="input-group-btn">
+                                                                <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block" ng-show="item.showtable_ho_va_ten">
+                                                                    <div class="table-responsive" style="max-height: 280px">
+                                                                        <table class="table table-striped table-hover" st-pagination-scroll st-table="staffsCollection" st-safe-src="arrayNVFinded">
+                                                                            <tbody>
+                                                                                <tr ng-repeat="staff in staffsCollection" style="cursor:pointer" ng-mousedown="showInfoSaleKD(staff,item)">
+                                                                                    <td>{{staff.USERNAME}}</td>
+                                                                                    <td>{{staff.HO_VA_TEN}}</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </th>
+                                                        <th colspan="3" style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;border-right: 2px solid lightsteelblue !important;">
+                                                            <button type="button" ng-click="addnew(item.MA_KHACH_HANG);showrow = false" class="btn btn-default">Lưu</button>
+                                                            <button type="button" ng-click="showrow = false" class="btn btn-default">Ẩn dòng</button>
+                                                        </th>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th colspan="10" style="border: 1px solid #FAEBD7; background-color: #FAEBD7 !important"><span ng-click="hienthidong()" style="cursor: pointer; color: black; font-weight: bold">Click vào đây để thêm dòng mới</span></th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="taikhoankhachhang" class="tab-pane fade">
+                                        <button type="button" ng-click="transfer(item)" class="btn fa fa-plus" data-dismiss="modal" data-toggle="modal" data-target="#newtaikhoan" style="float: right; margin-bottom: 5px;">Thêm mới</button>
+                                        <table class="table">
+                                            <thead class="table-header-popup">
+                                                <tr>
+                                                    <th style="text-align: center">Số tài khoản</th>
+                                                    <th style="text-align: center">Tên tài khoản</th>
+                                                    <th style="text-align: center">Tên ngân hàng</th>
+                                                    <th style="text-align: center">Chi nhánh</th>
+                                                    <th style="text-align: center">Tỉnh/Thành phố</th>
+                                                    <th style="text-align: center">Ghi chú</th>
+                                                    <th style="text-align: center">Loại tài khoản</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="taikhoan in list_taikhoankh" ng-click="details(taikhoan)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                                                    <td>{{taikhoan.SO_TAI_KHOAN}}</td>
+                                                    <td>{{taikhoan.TEN_TAI_KHOAN}}</td>
+                                                    <td>{{taikhoan.TEN_NGAN_HANG}}</td>
+                                                    <td>{{taikhoan.CHI_NHANH}}</td>
+                                                    <td>{{taikhoan.TINH_TP}}</td>
+                                                    <td>{{taikhoan.GHI_CHU}}</td>
+                                                    <td>{{taikhoan.TEN_LOAI}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="phanhoikhachhang" class="tab-pane fade">
+                                        <button type="button" ng-click="transfer(item)" class="btn fa fa-plus" data-dismiss="modal" data-toggle="modal" data-target="#newphanhoi" style="float: right; margin-bottom: 5px;">Thêm mới</button>
+                                        <table class="table">
+                                            <tr style="border: 1px solid #ddd !important">
+                                                <th style="border: 1px solid #ddd !important; width: 10%">Ngày phản hồi</th>
+                                                <th style="border: 1px solid #ddd !important; width: 10%">Người phản hồi</th>
+                                                <th style="border: 1px solid #ddd !important; width: 70%">Thông tin phản hồi</th>
+                                                <th colspan="2" style="border: 1px solid #ddd !important; width: 10%">Action</th>
+                                            </tr>
+
+                                            <tr ng-repeat="khachphanhoi in list_phanhoi | orderBy:'-NGAY_PHAN_HOI'">
+
+                                                <td class="text-left">{{khachphanhoi.NGAY_PHAN_HOI}}</td>
+                                                <td class="text-left">{{khachphanhoi.HO_VA_TEN}}</td>
+                                                <td class="text-left">
+                                                    <p ng-bind-html="khachphanhoi.THONG_TIN_PHAN_HOI | unsafe" class="thongtinphanhoi-{{khachphanhoi.ID}}"></p>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="edit_thongtinphanhoi(khachphanhoi)" class="btn fa fa-edit" data-dismiss="modal" data-toggle="modal" data-target="#editphanhoi">Sửa</button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="XoaPhanHoi(khachphanhoi)" class="btn fa fa-trash">Xóa</button>
+                                                </td>
+                                            </tr>
+                                            <tr style="border: 2px solid #ddd !important" ng-show="themmoidong">
+                                                <th colspan="4" style="background: none !important; width: 90%">
+                                                    <textarea id="phanhoimoi" name="phanhoimoi" class="form-control input-md"></textarea>
+                                                    @*<script>
+                                                            CKEDITOR.replace('phanhoimoi', {
+                                                                height: 150
+                                                            });
+                                                        </script>*@
+                                                </th>
+                                                <th colspan="1" style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;border-right: 2px solid lightsteelblue !important; background: none !important; width: 10%">
+                                                    <button id="addnew" name="addnew" class="btn btn-default" ng-click="addnewphanhoi(item.MA_KHACH_HANG, item.USERNAME);themmoidong = false" style="margin-bottom: 11px;">Thêm</button>
+                                                    <button type="button" ng-click="themmoidong = false" class="btn btn-default">Ẩn dòng</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="5" style="border: 1px solid #FAEBD7; background-color: #FAEBD7 !important;"><span ng-click="hienthidongmoi()" style="cursor: pointer; color: black; font-weight: bold">Click vào đây để thêm dòng mới</span></th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div id="thongkemuahang" class="tab-pane fade">
+                                        <input ng-model="timkiemthongke" placeholder="Tìm kiếm mã hàng" ng-change="find_thong_ke(timkiemthongke,item.MA_KHACH_HANG)" />
+                                        <table class="table">
+                                            <thead class="table-header-popup">
+                                                <tr>
+                                                    <th style="text-align: center">Mã hàng</th>
+                                                    <th style="text-align: center">Số lượng mua</th>
+                                                    <th style="text-align: center">Đơn giá mua</th>
+                                                    <th style="text-align: center">Ngày mua</th>
+                                                    <th style="text-align: center">Nhân viên bán hàng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="thongke in thong_ke_mua_hang" ng-click="details(taikhoan)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                                                    <td>{{thongke.MA_HANG}}</td>
+                                                    <td>{{thongke.SL_MUA}}</td>
+                                                    <td>{{thongke.DON_GIA_MUA | currency: '' : 0}}</td>
+                                                    <td>{{thongke.NGAY_MUA | date: 'dd/MM/yyyy'}}</td>
+                                                    <td>{{thongke.NHAN_VIEN_MUA_HANG}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="col-md-12" id="pagination_thongke">
+                                            <div>
+                                                <div id="pagination-3" style="width: 30%;display:inline-block"></div>
+                                            </div>
+                                            <div>
+                                                <samp>
+                                                    <span>Current page:</span>
+                                                    <span id="page-number-3"></span>
+                                                </samp>
+                                            </div>
+                                        </div>
+                                        @*<button type="button" ng-click="transfer(item)" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#newtaikhoan">Thêm mới</button>*@
+                                    </div>
+
+                                    <div id="policy" class="tab-pane fade">
+
+                                        <table class="table">
+                                            <thead>
+                                                @*<tr style="border: 2px solid #ddd !important; font-weight:bold; background:#64B5F6">
+                                                        <th style="border: 2px solid lightsteelblue !important; background: wheat;">Mã nhóm hàng</th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Giá bán<br />(Lợi nhuận từ giá nhập bao nhiêu %)</th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Chiết khấu<br /> (từ giá list) </th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Giá bán cũ 1</th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Chiết khấu cũ 1</th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Giá bán cũ 2</th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Chiết khấu cũ 2</th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Giá báncũ 3</th>
+                                                        <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important; background: wheat;">Chiết khấu cũ 3</th>
+                                                        <th style="border: 2px solid lightsteelblue !important; background: wheat;" ng-show="hienchucnang">Sửa</th>
+                                                    </tr>*@
+
+                                                <tr>
+                                                    <th>Mã nhóm hàng</th>
+                                                    <th>Giá bán<br />(Lợi nhuận từ giá nhập bao nhiêu %)</th>
+                                                    <th>Chiết khấu<br /> (từ giá list) </th>
+                                                    <th>Giá bán cũ 1</th>
+                                                    <th>Chiết khấu cũ 1</th>
+                                                    <th>Giá bán cũ 2</th>
+                                                    <th>Chiết khấu cũ 2</th>
+                                                    <th>Giá báncũ 3</th>
+                                                    <th>Chiết khấu cũ 3</th>
+                                                    <th ng-show="hienchucnang">Sửa</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @*<tr ng-repeat="policy in list_policy" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                                                        <td style="border-left: 2px solid lightsteelblue !important;" class="text-left">{{policy.MA_NHOM_HANG}}</td>
+                                                        <td style="border-left: 2px solid lightsteelblue !important;">
+                                                            <p ng-hide="editMode"><b style="color:blue">{{policy.GIA_BAN | currency : '' : 0}}</b></p>
+                                                            <input type="number" ng-model="policy.GIA_BAN" ng-show="editMode" />
+                                                            <i style="font-size:9px;">{{policy.TEN_NGUOI_CAP_NHAT}}({{policy.NGAY_CAP_NHAT | date: 'dd/MM/yyyy HH:mm a'}})</i>
+                                                        </td>
+                                                        <td style="border-right: 2px solid lightsteelblue !important;">
+                                                            <p ng-hide="editMode"><b style="color:blue">{{policy.CK}} %</b></p>
+                                                            <input type="number" ng-model="policy.CK" ng-show="editMode" />
+                                                            <i style="font-size:9px;">{{policy.TEN_NGUOI_CAP_NHAT}}({{policy.NGAY_CAP_NHAT | date: 'dd/MM/yyyy HH:mm a'}})</i>
+                                                        </td>
+                                                        <td style="border-left: 2px solid lightsteelblue !important;">{{policy.GIA_HISTORY_1 | currency: '' : 0}}</td>
+                                                        <td style="border-right: 2px solid lightsteelblue !important;">{{policy.CK_HISTORY_1 | currency: '' : 0}} %</td>
+                                                        <td style="border-left: 2px solid lightsteelblue !important;">{{policy.GIA_HISTORY_2 | currency: '' : 0}}</td>
+                                                        <td style="border-right: 2px solid lightsteelblue !important;">{{policy.CK_HISTORY_2 | currency: '' : 0}} %</td>
+                                                        <td style="border-left: 2px solid lightsteelblue !important;">{{policy.GIA_HISTORY_3 | currency: '' : 0}}</td>
+                                                        <td style="border-right: 2px solid lightsteelblue !important;">{{policy.CK_HISTORY_3 | currency: '' : 0}} %</td>
+                                                        <td style="border-right: 2px solid lightsteelblue !important;" ng-show="hienchucnang">
+                                                            <button type="submit" ng-hide="editMode" ng-click="editMode = true; editpolicy(policy)" class="btn btn-default">Sửa nhanh</button>
+                                                            <button type="submit" ng-show="editMode" ng-click="editMode = false; save_policy(policy)" class="btn btn-default">Save</button>
+                                                            <button type="submit" ng-show="editMode" ng-click="editMode = false; delete_policy(policy)" class="btn btn-default">Delete</button>
+                                                            <button type="submit" ng-show="editMode" ng-click="editMode = false; cancel_policy(policy)" class="btn btn-default">Cancel</button>
+                                                        </td>
+                                                    </tr>*@
+
+                                                <tr ng-repeat="policy in list_policy" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                                                    <td class="text-left">{{policy.MA_NHOM_HANG}}</td>
+                                                    <td>
+                                                        <p ng-hide="editMode"><b style="color:blue">{{policy.GIA_BAN | currency : '' : 0}}</b></p>
+                                                        <input type="number" ng-model="policy.GIA_BAN" ng-show="editMode" />
+                                                        <i style="font-size:9px;">{{policy.TEN_NGUOI_CAP_NHAT}}({{policy.NGAY_CAP_NHAT | date: 'dd/MM/yyyy HH:mm a'}})</i>
+                                                    </td>
+                                                    <td>
+                                                        <p ng-hide="editMode"><b style="color:blue">{{policy.CK}} %</b></p>
+                                                        <input type="number" ng-model="policy.CK" ng-show="editMode" />
+                                                        <i style="font-size:9px;">{{policy.TEN_NGUOI_CAP_NHAT}}({{policy.NGAY_CAP_NHAT | date: 'dd/MM/yyyy HH:mm a'}})</i>
+                                                    </td>
+                                                    <td>{{policy.GIA_HISTORY_1 | currency: '' : 0}}</td>
+                                                    <td>{{policy.CK_HISTORY_1 | currency: '' : 0}} %</td>
+                                                    <td>{{policy.GIA_HISTORY_2 | currency: '' : 0}}</td>
+                                                    <td>{{policy.CK_HISTORY_2 | currency: '' : 0}} %</td>
+                                                    <td>{{policy.GIA_HISTORY_3 | currency: '' : 0}}</td>
+                                                    <td>{{policy.CK_HISTORY_3 | currency: '' : 0}} %</td>
+                                                    <td ng-show="hienchucnang">
+                                                        <button type="submit" ng-hide="editMode" ng-click="editMode = true; editpolicy(policy)" class="btn fa fa-edit">Sửa nhanh</button>
+                                                        <button type="submit" ng-show="editMode" ng-click="editMode = false; save_policy(policy)" class="btn fa fa-save">Save</button>
+                                                        <button type="submit" ng-show="editMode" ng-click="editMode = false; delete_policy(policy)" class="btn fa fa-trash">Delete</button>
+                                                        <button type="submit" ng-show="editMode" ng-click="editMode = false; cancel_policy(policy)" class="btn fa fa-ban">Cancel</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr style="border: 2px solid #ddd !important" ng-show="showrow">
+                                                    <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                        <input type="text" placeholder="Mã nhóm hàng" ng-model="ma_nhom_hang_policy" ng-focus="showtable_VTHH = true" ng-blur="showtable_VTHH = false" ng-change="onVTHHFind()" style="color: black !important" />
+                                                        <div class="input-group-btn">
+                                                            @*<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="showtable_VTHH = !showtable_VTHH" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="caret"></span>
+                                                                </button>*@
+                                                            <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block" ng-show="showtable_VTHH">
+                                                                <div class="table-responsive" style="max-height: 280px">
+                                                                    <table class="table table-striped table-hover" st-pagination-scroll st-table="VTHHCollection" st-safe-src="arrayVTHHFinded">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>Mã nhóm hàng</td>
+                                                                                <td>Chủng loại hàng</td>
+                                                                            </tr>
+                                                                            <tr ng-repeat="vthh in VTHHCollection" style="cursor:pointer" ng-mousedown="showInfoStaff(vthh)">
+                                                                                <td>{{vthh.MA_NHOM_HANG_CHI_TIET}}</td>
+                                                                                <td>{{vthh.CHUNG_LOAI_HANG}}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                        <input type="number" class="form-control" placeholder="Giá bán mới nhất" ng-model="gia_ban_policy" />
+                                                    </th>
+                                                    <th style="border-top: 2px solid lightsteelblue !important; border-right: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                        <input type="number" class="form-control" placeholder="CK mới nhất" ng-model="ck_policy" />
+                                                    </th>
+                                                    <th colspan="4" style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;">
+                                                        <input type="text" class="form-control" ng-model="ma_nhom_hang_cha" placeholder="Mã nhóm hàng cha" ng-focus="showtable_VTHH_Father = true" ng-blur="showtable_VTHH_Father = false" ng-change="onVTHH_Father_Find()" />
+                                                        <div class="input-group-btn">
+                                                            <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block" ng-show="showtable_VTHH_Father">
+                                                                <div class="table-responsive" style="max-height: 280px">
+                                                                    <table class="table table-striped table-hover" st-pagination-scroll st-table="VTHH_FatherCollection" st-safe-src="arrayVTHH_Father_Finded">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>Mã nhóm hàng</td>
+                                                                                <td>Chủng loại hàng</td>
+                                                                            </tr>
+                                                                            <tr ng-repeat="staff in VTHH_FatherCollection" style="cursor:pointer" ng-mousedown="hienthigiatrimanhomhangcha(staff)">
+                                                                                <td>{{staff.MA_NHOM_HANG_CHI_TIET}}</td>
+                                                                                <td>{{staff.CHUNG_LOAI_HANG}}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <input type="text" placeholder="Marketing phụ trách" class="form-control" ng-model="ho_va_ten_marketing" value="{{ho_va_ten_marketing}}" ng-change="onMarketingFind()" ng-focus="showtable_marketing = true" ng-blur="showtable_marketing = false">
+                                                        <input type="hidden" class="form-control" ng-model="username_marketing">
+                                                        <div class="input-group-btn">
+                                                            @*<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="showtable_marketing = !showtable_marketing" aria-haspopup="true" aria-expanded="false" style="background: transparent !important; color: black !important;">
+                                                                    <span class="caret"></span>
+                                                                </button>*@
+                                                            <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block" ng-show="showtable_marketing">
+                                                                <div class="table-responsive" style="max-height: 280px">
+                                                                    <table class="table table-striped table-hover" st-pagination-scroll st-table="MarketingCollection" st-safe-src="arrayMarketingFinded">
+                                                                        <tbody>
+                                                                            <tr ng-repeat="staff in MarketingCollection" style="cursor:pointer" ng-mousedown="showInfoMarketing(staff,item)">
+                                                                                <td>{{staff.USERNAME}}</td>
+                                                                                <td>{{staff.HO_VA_TEN}}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <input type="text" placeholder="Nhân viên mua phụ trách" class="form-control" ng-model="ho_va_ten_purchase" value="{{ho_va_ten_purchase}}" ng-change="onPurchaseFind()" ng-focus="showtable_purchase = true" ng-blur="showtable_purchase = false">
+                                                        <input type="hidden" class="form-control" ng-model="username_purchase">
+                                                        <div class="input-group-btn">
+                                                            <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block" ng-show="showtable_purchase">
+                                                                <div class="table-responsive" style="max-height: 280px">
+                                                                    <table class="table table-striped table-hover" st-pagination-scroll st-table="PurchaseCollection" st-safe-src="arrayPurcFinded">
+                                                                        <tbody>
+                                                                            <tr ng-repeat="staff in PurchaseCollection" style="cursor:pointer" ng-mousedown="showInfoPurchase(staff,item)">
+                                                                                <td>{{staff.USERNAME}}</td>
+                                                                                <td>{{staff.HO_VA_TEN}}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th colspan="3" style="border-top: 2px solid lightsteelblue !important; border-left: 2px solid lightsteelblue !important; border-bottom: 2px solid lightsteelblue !important;border-right: 2px solid lightsteelblue !important;">
+                                                        <button type="button" ng-click="addnew_policy(item.MA_KHACH_HANG)" class="btn btn-default">Lưu</button>
+                                                        <button type="button" ng-click="showrow = false" class="btn btn-default">Ẩn dòng</button>
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th colspan="10" style="border: 2px solid lightsteelblue !important"><span ng-click="hienthidong()" style="cursor: pointer; text-decoration:underline; color:blue; font-weight: bold">Click vào đây để thêm dòng mới</span></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <div id="hosothanhtoan" class="tab-pane fade">
+                                        <div class="col-md-12">
+                                            <p ng-bind-html="item.HO_SO_THANH_TOAN | unsafe" class="{{item.MA_KHACH_HANG}}-2"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+    (function () {
+
+        var bar = $('.progress-bar');
+        var percent = $('.progress-bar');
+        var status = $('#status');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+
+
+    })();
+    </script>
+</div>
+

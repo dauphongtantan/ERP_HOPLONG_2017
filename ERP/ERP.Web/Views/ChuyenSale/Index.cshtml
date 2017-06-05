@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Content/self-writing/js/Services/ChuyenSaleService.js"></script>
+<script src="~/Content/self-writing/js/Services/KhachHangServices.js"></script>
+<script src="~/Content/self-writing/js/Controllers/ChuyenSaleCtrl.js"></script>
+<script src="~/Content/self-writing/js/Controllers/KhachHangCtrl.js"></script>
+
+<style>
+    .hienthi {
+        display : block !important;
+    }
+    .nohienthi{
+        display : none !important;
+    }
+</style>
+<div ng-app="myApp" ng-controller="chuyensaleCtrl">
+    <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+    <div class="content">
+        <table id="example" class="table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Mã khách hàng</th>
+                    <th>Tên công ty</th>
+                    <th>Tỉnh</th>
+                    <th>Sale hiện thời</th>
+                    <th>Nhân viên kho phụ trách</th>
+                    <th>Sale cũ 1</th>
+                    <th>Sale cũ 2</th>
+                    <th>Sale mẹ</th>
+                    <th>Sửa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate="entry in filtered = (list_chuyensale | filter: {TEN_CONG_TY:search_text}) | itemsPerPage:15 | orderBy: 'item.TEN_CONG_TY'" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <td >{{entry.MA_KHACH_HANG}}</td>                  
+                    <td >{{entry.TEN_CONG_TY}}</td>
+                    <td>{{entry.TINH}}</td>
+                    <td class="text-left">
+                        <p ng-hide="editMode" ng-model="entry.SALE_HIEN_THOI">{{entry.TEN_SALE_HIEN_THOI}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Sale</label>
+                            <md-select ng-model="entry.SALE_HIEN_THOI">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
+                    <td class="text-left">
+                        <p ng-hide="editMode" ng-model="entry.KHO_PHU_TRACH">{{entry.TEN_KHO_PHU_TRACH}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Kho</label>
+                            <md-select ng-model="entry.KHO_PHU_TRACH">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkho" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
+                    <td class="text-left">
+                        <p ng-hide="editMode" ng-model="entry.SALE_CU">{{entry.TEN_SALE_CU}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Sale</label>
+                            <md-select ng-model="entry.SALE_CU">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
+                    <td class="text-left">
+                        <p ng-hide="editMode" ng-model="entry.SALE_CU_2">{{entry.TEN_SALE_CU_HON}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Sale</label>
+                            <md-select ng-model="entry.SALE_CU_2">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
+                    <td class="text-left">
+                        <p ng-hide="editMode" ng-model="entry.SALE_ME">{{entry.TEN_SALE_ME}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Sale</label>
+                            <md-select ng-model="entry.SALE_ME">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
+                    <td>                    
+                        <button type="submit" ng-hide="editMode" ng-click="editMode = true; editAppKey(entry)" class="btn btn-default">Edit</button>
+                        <button type="submit" ng-show="editMode" ng-click="editMode = false; save(entry)" class="btn btn-default">Save</button>
+                        <button type="submit" ng-show="editMode" ng-click="editMode = false; cancel()" class="btn btn-default">Cancel</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="9" style="border: none !important">
+                        <dir-pagination-controls max-size="12" style="float:right;"
+                                                 direction-links="true"
+                                                 boundary-links="true">
+                        </dir-pagination-controls>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+

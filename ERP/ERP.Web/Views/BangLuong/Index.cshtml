@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout= "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/Content/self-writing/css/BangLuong.css" rel="stylesheet" />
+
+<div class="panel-heading"><b>Bảng lương của @Session["HO_VA_TEN"]</b></div>
+<br />
+<div class="content" ng-app="myApp" ng-controller="bangluongCtrl">
+    <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+    <input type="hidden" value="@Session["PASSWORD"]" id="password" />
+    <div class="col-md-12" ng-hide="matkhau">
+        <input type="password" ng-model="password" placeholder="Mật khẩu xác thực"/>
+        <button type="button" class="btn btn-default" ng-click="xacnhanmk(password)">
+            Xác nhận mật khẩu
+        </button>
+    </div>
+
+    <div class="row" ng-show="matkhau">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    
+                    <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+                </h4>
+                <div class="message text-left">
+                    <p>Công ty xin gửi bảng lương đến bạn @Session["HO_VA_TEN"] với các thông tin như bên dưới</p>
+                    <p>Cảm ơn bạn đã nỗ lực làm việc trong tháng vừa qua, rất mong bạn sẽ cùng công ty cố gắng và thành công hơn nữa</p>
+                    <p>Mọi vấn đề thắc mắc về bảng lương, bạn hãy phản hồi lại với công ty theo sđt: <b>0987960599</b> hoặc email <span>nhan@hoplongtech.com.vn</span> </p>
+                </div>
+            </div>
+            <div class="maintable">
+                <table class="table table-fixed" border="1">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="fix">THÁNG</th>
+                            <th rowspan="2" class="fix">HỌ VÀ TÊN</th>
+                            <th rowspan="2" class="fix">LƯƠNG CƠ BẢN</th>
+                            <th rowspan="2" class="fix">LƯƠNG BẢO HIỂM</th>
+                            <th colspan="5">PHỤ CẤP</th>
+                            <th rowspan="2" class="fix">CÔNG CƠ BẢN </th>
+                            <th colspan="2">LƯƠNG CƠ BẢN</th>
+                            <th colspan="2">BẢO HIỂM</th>
+                            <th colspan="2">LƯƠNG THỰC TẾ</th>
+                            <th colspan="6">LƯƠNG LÀM THÊM</th>
+                            <th rowspan="2" class="fix">TỔNG THU NHẬP</th>
+                            <th rowspan="2" class="fix">TẠM ỨNG</th>
+                            <th rowspan="2" class="fix">VAY TÍN DỤNG</th>
+                            <th colspan="2">PHẠT ĐI TRỄ</th>
+                            <th rowspan="2" class="fix">PHẠT ĐỒNG PHỤC</th>
+                            <th rowspan="2" class="fix">QUỸ CÔNG ĐOÀN</th>
+                            <th rowspan="2" class="fix">LƯƠNG LAO CÔNG</th>
+                            <th rowspan="2" class="fix">THỰC LĨNH</th>
+                        </tr>
+                        <tr style="background:#0099FF ; color:#FFEEF1; font-weight bold">
+                            <th>Ăn trưa</th>
+                            <th>Đi lại/điện thoại</th>
+                            <th>Thưởng doanh số</th>
+                            <th>Trách nhiệm</th>
+                            <th>Khác</th>
+                            <th>Ngày</th>
+                            <th>Giờ</th>
+                            <th>Công ty đóng</th>
+                            <th>Nhân viên đóng</th>
+                            <th>Công đi làm thực</th>
+                            <th>Số tiền</th>
+                            <th>Công ngày thường</th>
+                            <th>Số tiền</th>
+                            <th>Công ngày nghỉ</th>
+                            <th>Số tiền</th>
+                            <th>Công ngày lễ</th>
+                            <th>Số tiền</th>
+                            <th>Số giờ</th>
+                            <th>Số tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in list_bangluong">
+                            <td>{{item.THANG_LUONG}}</td>
+                            <td>@Session["HO_VA_TEN"]</td>
+                            <td>{{item.LUONG_CO_BAN}}</td>
+                            <td>{{item.LUONG_BAO_HIEM}}</td>
+                            <td>{{item.PHU_CAP_AN_TRUA}}</td>
+                            <td>{{item.PHU_CAP_DI_LAI_DIEN_THOAI}}</td>
+                            <td>{{item.PHU_CAP_THUONG_DOANH_SO}}</td>
+                            <td>{{item.PHU_CAP_TRACH_NHIEM}}</td>
+                            <td>{{item.PHU_CAP_THEM}}</td>
+                            <td>{{item.CONG_CO_BAN}}</td>
+                            <td>{{item.LUONG_CO_BAN_NGAY}}</td>
+                            <td>{{item.LUONG_CO_BAN_GIO}}</td>
+                            <td>{{item.BAO_HIEM_CONG_TY_DONG}}</td>
+                            <td>{{item.BAO_HIEM_NHAN_VIEN_DONG}}</td>
+                            <td>{{item.LUONG_THUC_TE_CONG_LAM_THUC}}</td>
+                            <td>{{item.LUONG_THUC_TE_SO_TIEN}}</td>
+                            <td>{{item.LUONG_LAM_THEM_CONG_NGAY_THUONG}}</td>
+                            <td>{{item.LUONG_LAM_THEM_TIEN_CONG_NGAY_THUONG}}</td>
+                            <td>{{item.LUONG_LAM_THEM_CONG_NGAY_NGHI}}</td>
+                            <td>{{item.LUONG_LAM_THEM_TIEN_CONG_NGAY_NGHI}}</td>
+                            <td>{{item.LUONG_LAM_THEM_CONG_NGAY_LE}}</td>
+                            <td>{{item.LUONG_LAM_THEM_TIEN_CONG_NGAY_LE}}</td>
+                            <td>{{item.TONG_THU_NHAP}}</td>
+                            <td>{{item.TAM_UNG}}</td>
+                            <td>{{item.VAY_TIN_DUNG}}</td>
+                            <td>{{item.GIO_DI_TRE}}</td>
+                            <td>{{item.PHAT_DI_TRE}}</td>
+                            <td>{{item.PHAT_QUEN_DONG_PHUC}}</td>
+                            <td>{{item.CONG_DOAN}}</td>
+                            <td>{{item.LUONG_LAO_CONG}}</td>
+                            <td>{{item.THUC_LINH}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-left" style="font-weight: bold; color: blue; padding-left:10px;">
+                <p>Thay đổi về mức đóng bảo hiềm của cty và người lao động - Theo quy định mới của nhà nước- áp dụng từ t1-2017. </p>
+                <p>Thay đổi của cty Hợp Long -về việc tính giờ đi  muộn,giờ về sớm. </p>
+                <p>Thay đổi của cty Hợp Long -Tháng 2 sẽ bắt đầu sẽ tính phạt quên k chấm công. </p>
+                <p>Thay đổi của cty Hợp Long - về việc cấp quản lý, không được tính giờ làm thêm, không  được trả phép năm. </p>
+                <p>Thay đổi của cty Hợp Long - về việc cấp quản lý đi làm thêm ngày nghỉ, ngày lễ ,không được tính làm thêm giờ.</p>
+                <p>Thay đổi của cty Hợp Long - vê việc  cổ đông sáng lập tham gia công tác quản lý, điều hành không đc hưởng lương trách nhiệm.  </p>
+                <p>Tháng 4-2017 công ty thực hiện tăng lương theo quy chế của công ty cũng là thể hiện sự cảm ơn của công ty về sự nỗ lực của các cán bộ nhân viên trong thời gian qua, mong toàn thể CBNV làm việc ngày càng nỗ lực hơn, và tinh thần trách  nhiệm ngày càng nâng cao hơn nữa.     </p>
+
+            </div>
+        </div>
+    </div>
+</div>

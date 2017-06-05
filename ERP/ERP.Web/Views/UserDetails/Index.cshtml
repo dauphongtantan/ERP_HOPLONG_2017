@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/self-writing/css/UserDetails.css" rel="stylesheet" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
+
+<div ng-app="myApp" ng-controller="userdetailCtrl" class="container">
+    <input type="hidden" value="@Session["USERNAME"]" id="username" />
+    <input type="hidden" value="@Session["PASSWORD"]" id="sessionpw" />
+    <input type="hidden" value="@Session["HO_VA_TEN"]" id="hovaten" />
+    <input type="hidden" id="vh_iAct_1" class="isActive" name="isActive" value="@Session["ALLOWED"]" />
+    <div style="margin: 20px;padding:5px;">
+        <ul class="nav nav-tabs" style="margin-bottom: 20px;    ">
+            <li class="active"><a data-toggle="tab" href="#chitiet">User Details</a></li>
+            <li><a data-toggle="tab" href="#doimatkhau">Change Password</a></li>
+        </ul>
+        <div class="tab-content" style="margin: 20px;padding:5px;padding-bottom: 50px; padding-left: 40px; border: 1px solid #DCF5FC;box-shadow:3px 3px 3px #DCF5FC;">
+            <div id="chitiet" class="tab-pane fade in active">
+                <div class="row" ng-repeat="nv in list_details">
+                    <div class="col-md-4">
+                        <img ng-src="~/Content/Images/Avatar/{{nv.AVATAR}}" name="aboutme" style="width: 100%" height="300" border="0">
+                        <button class="btn btn-default" data-dismiss="modal" type="button" data-toggle="modal" data-target="#edit_image" ng-click="transfer(nv)">Sửa ảnh cá nhân</button>
+                    </div>
+                    <div class="col-md-8">
+                        <h1 style="color: #097be0;font-weight: bold">{{nv.HO_VA_TEN}}</h1>
+                        <div class="col-md-12" style="margin-bottom: 20px;">
+                            <p class="col-md-5" style="color: #097be0"><i class="fa fa-home" aria-hidden="true" style="margin-right: 5px;color: #097be0"></i>{{nv.TEN_PHONG_BAN}}</p>
+                            <p class="col-md-5" style="color: #097be0"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-right: 5px;color: #097be0"></i>{{nv.CHUC_VU}}</p>
+                        </div>
+                        <div class="col-md-12 thongtin">
+                            <p class="col-md-6"><b>Họ và tên:</b> {{nv.HO_VA_TEN}}</p>
+                            <p class="col-md-6"><b>Quê quán:</b> {{nv.QUE_QUAN}}</p>
+                        </div>
+                        <div class="col-md-12 thongtin">
+                            <p class="col-md-6"><b>Giới tính:</b> {{nv.GIOI_TINH}}</p>
+                            <p class="col-md-6"><b>Học vấn:</b> {{nv.TRINH_DO_HOC_VAN}}</p>
+                        </div>
+                        <div class="col-md-12 thongtin">
+                            <p class="col-md-6"><b>Ngày sinh:</b> {{nv.NGAY_SINH |stringToDate:"shortDate" }}</p>
+                        </div>
+                        <div class="col-md-12 thongtin">
+                            <p class="col-md-6"><b>Số điện thoại:</b> {{nv.SDT}}</p>
+                        </div>
+                        <div class="col-md-12 thongtin">
+                            <p class="col-md-6"><b>Email:</b> {{nv.EMAIL}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h1 style="color: #097be0">Thành tích công tác</h1>
+                        <p class="col-md-12 {{nv.USERNAME}}-1" ng-bind-html="nv.THANH_TICH_CONG_TAC | unsafe" style="word-break: break-word"></p>
+                    </div>
+                </div>
+            </div>
+            <div id="doimatkhau" class="tab-pane fade">
+                <div class="container">
+                    <input type="password" placeholder="Mật khẩu cũ" ng-model="oldpw" class="col-md-4 col-md-offset-3 pw" />
+                    <br />
+                    <input type="password" placeholder="Mật khẩu mới" ng-model="newpw" class="col-md-4 col-md-offset-3 pw" />
+                    <br />
+                    <button type="button" ng-click="changepw()" class="btn col-md-4 col-md-offset-3 pw" data-dismiss="modal" data-toggle="modal" data-target="#changepw">Đổi mật khẩu</button>
+                </div>
+            </div>
+            <div class="modal fade" id="changepw" role="dialog" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <b class="error" style="display: none">Mật khẩu cũ không đúng</b>
+                            <b class="successful" style="display: none">Thay đổi mật khẩu thành công</b>
+                            <button class="btn successful" onclick="reload()" style="display: none">Xác nhận</button>
+                            <button id="exit" name="exit" class="btn addnewmodal error" data-dismiss="modal" style="display: none">Exit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="edit_image" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <form action="/UserDetails/Index" ng-controller="imgCtrl" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type='file' name="files" id="imgInp" />
+                            <img id="blah" src="#" height="250" width="400" />
+                            <input type="submit" value="Upload File/Image" ng-click="edit(item.USERNAME)" style="margin-top: 30px;" />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="exit" name="exit" class="btn btn-danger" data-dismiss="modal">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function () {
+
+        var bar = $('.progress-bar');
+        var percent = $('.progress-bar');
+        var status = $('#status');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+
+    })();
+    </script>
+</div>

@@ -1,0 +1,23 @@
+﻿
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+<script src="~/Content/self-writing/js/Controllers/KhoXuat/HomeKhoXuat.js"></script>
+<script src="~/Content/self-writing/js/Controllers/KhoXuat/KhoXuat.js"></script>
+<link href="~/Content/self-writing/css/Kho/kho.css" rel="stylesheet" />
+<div class="panel-heading">
+    <marquee width="80%">Bạn đang xem danh mục hàng cần xuất</marquee>
+</div>
+<div ng-app="myApp"
+     ng-controller="HangCanXuatCtrl"
+     layout="column">
+    <md-tabs md-stretch-tabs
+             md-selected="selectedIndex">
+        <md-tab label="List hàng cần xuất"></md-tab>
+        <md-tab label="List hàng cần đặt"></md-tab>
+        <md-tab label="List hàng đã giữ"></md-tab>
+        @*<md-tab label="Hàng chưa giữ"></md-tab>*@
+    </md-tabs>
+
+    <div id="content" ui-view flex> </div>
+
+</div>
+

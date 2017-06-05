@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ERP.Web.Models.Database.Prod_KH_ListLienHe_TheoNgay_Result>
+@*@{
+        Layout = null;
+    }*@
+<html>
+<head>
+    <script data-semver="2.0.0" src="https://code.angularjs.org/1.4.8/angular.js"></script>
+    <script data-semver="2.1.4" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+</head>
+<body>
+    <h1>Export to Excel</h1>
+
+        @*<button export-to-csv>Demo</button>*@
+        <table border="1" class="table">
+            @using (Html.BeginForm("ExportToExcel", "ChucNang", FormMethod.Post))
+            {
+                <tr>
+                    
+                    <th colspan="14"><input type="submit" value="Export to Excel" class="button" /> </th>
+                </tr>
+                <tr>
+                    <th>NGƯỜI LIÊN HỆ</th>
+                    <th>CHỨC VỤ</th>
+                    <th>PHÒNG BAN</th>
+                    <th>NGÀY SINH</th>
+                    <th>EMAIL CÁ NHÂN</th>
+                    <th>EMAIL CÔNG TY</th>
+                    <th>SKYPE</th>
+                    <th>FACEBOOK</th>
+                    <th>SĐT 1</th>
+                    <th>SĐT 2</th>
+                    <th>TÌNH TRẠNG LÀM VIỆC</th>
+                    <th>SALE QUẢN LÝ</th>
+                    <th>NGÀY TẠO</th>
+                    <th>GHI CHÚ</th>
+                </tr>
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NGUOI_LIEN_HE</td>
+                        <td>@item.CHUC_VU</td>
+                        <td>@item.PHONG_BAN</td>
+                        <td>@item.NGAY_SINH</td>
+                        <td>@item.EMAIL_CA_NHAN</td>
+                        <td>@item.EMAIL_CONG_TY</td>
+                        <td>@item.SKYPE</td>
+                        <td>@item.FACEBOOK</td>
+                        <td>@item.SDT1</td>
+                        <td>@item.SDT2</td>
+                        <td>@item.TINH_TRANG_LAM_VIEC</td>
+                        <td>@item.NGUOI_PHU_TRACH</td>
+                        <td>@item.NGAY_TAO</td>
+                        <td>@item.GHI_CHU</td>
+                    </tr>
+                }
+                <tr>
+                    <th colspan="14"><input type="submit" value="Export to Excel" class="button" /> </th>
+                </tr>
+            }
+        </table>
+    
+</body>
+</html>

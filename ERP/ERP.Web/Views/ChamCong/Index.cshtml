@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/self-writing/css/ChamCong.css" rel="stylesheet" />
+
+<div class="panel-heading">Bảng chấm công của @Session["HO_VA_TEN"]</div>
+<br />
+<body ng-app="myApp">
+
+
+
+    <div class="content" ng-controller="bangchamcongCtrl">
+
+        <input type="hidden" value="@Session["USERNAME"]" id="username" />
+        <input type="hidden" value="@Session["PASSWORD"]" id="password" />
+        <div class="col-md-12" ng-hide="matkhau">
+            <input type="password" ng-model="password" placeholder="Mật khẩu xác thực" />
+            <button type="button" class="btn btn-default" ng-click="kiemtramk(password)">
+                Xác nhận mật khẩu
+            </button>
+        </div>
+
+        <div class="creatediv1 marginTop30" ng-show="matkhau">
+
+            <div class="row margin-top-50">
+                <div class="col-md-12">
+                    <div class="panel panel-primary filterable">
+                        <p></p>
+                        <center class="center">
+                            <p>Công ty xin gửi bảng chấm công đến bạn @Session["HO_VA_TEN"] với các thông tin như bên dưới</p>
+                            <p>Cảm ơn bạn đã vất vả làm việc trong tháng vừa qua, rất mong bạn sẽ cùng công ty cố gắng hơn nữa</p>
+                            <p>Mọi vấn đề thắc mắc về bảng chấm công, bạn hãy phản hồi lại với công ty theo thông tin sau:</p>
+                            <span>Email: Dung@hoplongtech.com.vn hoặc Skype: nguyen.dung1993</span>
+                        </center>
+
+                        <div class="creat-link">
+
+                        </div>
+                        <div class="main">
+                            <table class="span12 table table-bordered table-striped bg tablescroll" border="1">
+                                
+                                   
+                                        <tr class="filters">
+                                            <th>
+                                                Tháng
+                                            </th>
+                                            <th>
+                                                Người dùng
+                                            </th>
+                                            <th>
+                                                Ngày chuẩn
+                                            </th>
+                                            <th>
+                                                Giờ đi muộn
+                                            </th>
+                                            <th>
+                                                Giờ về sớm
+                                            </th>
+                                            <th>
+                                                Tăng ca ngày thường
+                                            </th>
+                                            <th>
+                                                Tăng ca ngày lễ
+                                            </th>
+                                            <th>
+                                                Số lần quên chấm
+                                            </th>
+                                            <th>
+                                                Số ngày nghỉ
+                                            </th>
+                                            <th>
+                                                Công thực tế
+                                            </th>
+                                            <th>
+                                                Vay tín dụng
+                                            </th>
+                                            <th>
+                                                Ứng lương
+                                            </th>
+                                            <th class="note">
+                                                Ghi chú
+                                            </th>
+                                        </tr>
+                                        <tr ng-repeat="item in list_chamcong">
+                                            <td>{{item.THANG_CHAM_CONG}}</td>
+                                            <td>{{item.USERNAME}}</td>
+                                            <td>{{item.NGAY_CHUAN}}</td>
+                                            <td>{{item.GIO_DI_MUON}}</td>
+                                            <td>{{item.GIO_VE_SOM}}</td>
+                                            <td>{{item.TANG_CA_NGAY_THUONG}}</td>
+                                            <td>{{item.TANG_CA_NGAY_LE}}</td>
+                                            <td>{{item.SO_LAN_QUEN_CHAM}}</td>
+                                            <td>{{item.SO_NGAY_NGHI}}</td>
+                                            <td>{{item.CONG_THUC_TE}}</td>
+                                            <td>{{item.VAY_TIN_DUNG}}</td>
+                                            <td>{{item.UNG_LUONG}}</td>
+                                            <td>{{item.GHI_CHU}}</td>
+                                        </tr>
+                                    </table>
+                                
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+

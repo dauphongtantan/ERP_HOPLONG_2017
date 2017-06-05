@@ -1,0 +1,78 @@
+﻿<script src="~/Content/self-writing/js/Controllers/HeSoGiaBanCtrl.js"></script>
+
+<div class="content" ng-app="myApp" ng-controller="HeSoGiaBanCtrl">
+
+    <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+    <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã nhóm hàng</th>
+                <th>Dòng Seri</th>
+                <th>Loại khách lẻ</th>
+                <th>Loại khách mua nhiều</th>
+                <th>Khách đại lý</th>
+                <th>Khách không lấy VAT</th>
+                <th>Số lượng trên 30</th>
+                <th>Số lượng trên 100</th>
+                <th>Số lượng trên 200</th>
+                <th>Ghi chú</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="text" class="form-control" placeholder="Mã nhóm hàng" ng-model="ma_nhom_hang_chi_tiet"  ng-change="onVTHHFind()" ng-focus="showtable_VTHH = true" ng-blur="showtable_VTHH = false">
+                    <div class="input-group-btn">
+                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block" ng-show="showtable_VTHH">
+                            <div class="table-responsive" style="max-height: 280px">
+                                <table class="table table-striped table-hover" st-pagination-scroll st-table="staffsCollection" st-safe-src="arrayVTHHFinded">
+                                    <tbody>
+                                        <tr>
+                                            <th>Mã nhóm hàng</th>
+                                            <th>Chủng loại hàng</th>
+                                        </tr>
+                                        <tr ng-repeat="staff in staffsCollection" style="cursor:pointer" ng-mousedown="showInfoVTHH(staff)">
+                                            <td>{{staff.MA_NHOM_HANG_CHI_TIET}}</td>
+                                            <td>{{staff.CHUNG_LOAI_HANG}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="date" style="display:none">{{date | date: 'dd/MM/yyyy'}}</p>
+                </td>
+                <td>
+                    <input type="text" ng-model="dong_seri" placeholder="Dòng seri" class="form-control"/>
+                </td>
+                <td>
+                    <input type="text" ng-model="loai_khach_le" placeholder="Loại khách lẻ" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" ng-model="loai_khach_mua_nhieu" placeholder="Loại khách mua nhiều" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" ng-model="khach_dai_ly" placeholder="Khách đại lý" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" ng-model="khach_khong_lay_vat" placeholder="Khách không lấy VAT" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" ng-model="sl_mua_tren_30" placeholder="SL mua trên 30" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" ng-model="sl_mua_tren_100" placeholder="SL mua trên 100" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" ng-model="sl_mua_tren_200" placeholder="SL mua trên 200" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" ng-model="ghi_chu" placeholder="Ghi chú" class="form-control" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button ng-click="AddNew()" class="btn btn-default">Lưu</button>
+</div>
